@@ -58,6 +58,7 @@ class html {
 			    
                 <div class="form-group">
                   <div class="col-lg-10 col-lg-offset-2">
+By clicking creating an account you agree to the <a href="http://www.usfirst.org/aboutus/gracious-professionalism" target="_blank">Terms of Use</a>.<br>
                     <button type="submit" class="btn btn-primary">Create</button>       
                   </div>
                 </div>
