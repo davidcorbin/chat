@@ -2,9 +2,6 @@
 
 require("config.php");
 
-ini_set('display_errors', 'On');
-error_reporting(E_ALL | E_STRICT);
-
 unset($_SESSION['un']);
 unset($_SESSION['pw']);
 
@@ -22,13 +19,11 @@ if (isset($_POST["un"]) && isset($_POST["pw"])) {
 		header("Location: chat.php");
 	}
 	else {		
-		$options = array("incorrect" => "true");
-		$html->login($options);
+		$html->login("incorrect");
 	}
 }
 
 else {
-	$options = array();
-	$html->login($options);
+	$html->login("");
 }
 ?>

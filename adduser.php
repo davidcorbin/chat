@@ -32,8 +32,7 @@ if (!empty($_POST)) {
 	// Do the database query
 	else {
 		$database->query("INSERT INTO `logins`(`username`, `password`) VALUES ('" .$_POST['username'] . "', PASSWORD('" . $_POST['password'] . "'))");
-		$newuser = array("newuser" => "true");
-		$html->login($newuser);
+		$html->login('newuser');
 	}
 }
 
