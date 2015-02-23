@@ -1,7 +1,6 @@
 <?php
-$lifetime=86400; //24 hours
-session_start(); //Start session
-setcookie(session_name(), session_id(), time() + $lifetime); //CORRECT  SESSION TIMING! The session will always reset the timing every time the page is refreshed or changes. 
+
+require("config.php");
 
 header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
 header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
