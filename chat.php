@@ -2,12 +2,6 @@
 
 require("config.php");
 
-header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
-header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-
 require_once('class.db.php');
 $database = new db;
 
@@ -59,11 +53,13 @@ function timeconvert($ptime) {
 }
 
 	$chat = $database->fetch("SELECT * FROM `chat` ORDER BY date DESC LIMIT 50");
+	$me = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 	
 	for ($i = 0; $i < count($chat); $i++) {
-
+	
+		// If post is my me
 		if ($chat[$i]['user'] == $_SESSION['un']) {
-			echo '<li class="right clearfix"><span class="chat-img pull-right"><img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
+			echo '<li class="right clearfix"><span class="chat-img pull-right"><img src="' . $me[0]['avatar'] . '" alt="User Avatar" class="img-circle avatar" /><!--<img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />//--></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
 			echo $chat[$i]['user'];
 			echo '</strong><small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
@@ -72,9 +68,9 @@ function timeconvert($ptime) {
 			echo '</p></div></li>';
 		}
 		
-		
+		// If post is by anyone else
 		else {
-			echo '<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>';
+			echo '<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle avatar" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
 			echo '</small><strong class="pull-right primary-font">';
 			echo $chat[$i]['user'];
@@ -161,6 +157,11 @@ window.onload = function(){get();}
         </script>
     
     <style>
+.avatar {
+    width:40px;
+    height:40px;
+}
+
     .chat 
 {
     list-style: none;
@@ -226,6 +227,3 @@ window.onload = function(){get();}
 
 $html->chat($info);
 }
-
-
-?>

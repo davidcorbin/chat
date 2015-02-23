@@ -19,8 +19,8 @@ if (!empty($_POST)) {
 	$rows = $database->rows("SELECT * FROM logins WHERE username = '" . $_POST['username'] . "'");
 	
 	// If both forms aren't filled in
-	if ($_POST['username'] == "" || $_POST['password'] == "") {
-		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please include both username and password.'));
+	if ($_POST['username'] == "" || $_POST['password'] == "" || $_POST['email'] == "") {
+		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please include username, email, and password.'));
 		return false;
 	}
 	
@@ -31,7 +31,7 @@ if (!empty($_POST)) {
 	
 	// Do the database query
 	else {
-		$database->query("INSERT INTO `logins`(`username`, `password`) VALUES ('" .$_POST['username'] . "', PASSWORD('" . $_POST['password'] . "'))");
+		$database->query("INSERT INTO `logins`(`username`, `password`, `email`) VALUES ('" .$_POST['username'] . "', PASSWORD('" . $_POST['password'] . "'),'" . $_POST['email'] . "')");
 		$html->login('newuser');
 	}
 }
@@ -39,5 +39,3 @@ if (!empty($_POST)) {
 else {
 	$html->adduser("");
 }
-
-?>
