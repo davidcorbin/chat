@@ -75,11 +75,11 @@ $usercreated = '<div class="alert alert-dismissable alert-success"><button type=
 	}
 
 	public function alertdanger($content) {
-		return "";
+		return '<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>' . $content . '</div>';
 	}
 	
 	public function alertsuccess($content) {
-		return "";
+		return '<div class="alert alert-dismissable alert-success"><button type="button" class="close" data-dismiss="alert">×</button>' . $content . '</div>';
 	}
 }
 ?>

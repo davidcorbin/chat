@@ -20,13 +20,13 @@ if (!empty($_POST)) {
 	
 	// If both forms aren't filled in
 	if ($_POST['username'] == "" || $_POST['password'] == "") {
-		$html->adduser('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">×</button><span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please include both username and password.</div>');
+		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please include both username and password.'));
 		return false;
 	}
 	
 	//If that username is already taken in the database
 	if ($rows == 1) {
-		$html->adduser('<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">×</button><span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That username is already taken. Please choose another one.</div>');
+		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That username is already taken. Please choose another one.'));
 	}
 	
 	// Do the database query
