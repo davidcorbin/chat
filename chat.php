@@ -202,6 +202,7 @@ window.onload = function(){get();}
 {
     overflow-y: scroll;
     height: 60vh;
+    -webkit-overflow-scrolling:touch;
 }
 
 ::-webkit-scrollbar-track
