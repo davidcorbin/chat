@@ -1,1 +1,0 @@
-[22-Feb-2015 21:51:19 CST6CDT] PHP Fatal error:  Call to a member function auth() on a non-object in /home/leapctf3/public_html/chat/chat.php on line 20
