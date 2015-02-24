@@ -24,14 +24,14 @@ if (!empty($_POST)) {
 		return false;
 	}
 	
-	//If that username is already taken in the database
+	// If that username is already taken in the database
 	if ($rows == 1) {
 		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That username is already taken. Please choose another one.'));
 	}
 	
 	// Do the database query
 	else {
-		$database->query("INSERT INTO `logins`(`username`, `password`, `email`) VALUES ('" .$_POST['username'] . "', PASSWORD('" . $_POST['password'] . "'),'" . $_POST['email'] . "')");
+		$database->query("INSERT INTO `logins`(`username`, `password`, `email`, `type`) VALUES ('" .$_POST['username'] . "', PASSWORD('" . $_POST['password'] . "'),'" . $_POST['email'] . "', 'user')");
 		$html->login('newuser');
 	}
 }
