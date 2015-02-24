@@ -16,10 +16,8 @@ $html = new html;
 
 $all = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 
-if ( !empty($_POST) ) {
-	print_r($_POST);
+if ( !empty($_POST) && $_POST['link']!="" ) {
 	$database->query("UPDATE `logins` SET `avatar`='" .$_POST['link'] . "' WHERE username='" . $_SESSION['un'] . "'");
-	
 }
 
 $html->settings($all);
