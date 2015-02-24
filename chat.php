@@ -71,7 +71,7 @@ function timeconvert($ptime) {
 			echo '</strong><small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
 			echo '</small></div><p>';
-			echo $chat[$i]['data'];
+			echo htmlspecialchars($chat[$i]['data']);
 			echo '</p></div></li>';
 		}
 		
@@ -92,7 +92,7 @@ function timeconvert($ptime) {
 			echo '</small><strong class="pull-right primary-font">';
 			echo $chat[$i]['user'];
 			echo '</strong></div><p>';
-			echo $chat[$i]['data'];
+			echo htmlspecialchars($chat[$i]['data']);
 			echo '</p></div></li>';
 		}		
 	}
