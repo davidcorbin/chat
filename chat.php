@@ -77,7 +77,17 @@ function timeconvert($ptime) {
 		
 		// If post is by anyone else
 		else {
-			echo '<li class="left clearfix"><span class="chat-img pull-left"><img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle avatar" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>';
+		
+			$chat_user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $chat[$i]['user'] . "'");
+		
+			if ($chat_user[0]['avatar']=="") {
+				$avatar = "http://placehold.it/50/55C1E7/fff&text=U";
+			}
+			else {
+				$avatar = $chat_user[0]['avatar'];
+			}
+			
+			echo '<li class="left clearfix"><span class="chat-img pull-left"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
 			echo '</small><strong class="pull-right primary-font">';
 			echo $chat[$i]['user'];
