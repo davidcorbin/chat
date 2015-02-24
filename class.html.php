@@ -92,6 +92,7 @@ By clicking creating an account you agree to the <a href="http://www.usfirst.org
                 <div class="form-group">
                   <label for="upload" class="col-lg-2 control-label">Upload</label>
                   <div class="col-lg-10 col-lg-offset-2">
+                    <img src="' . $user[0]['avatar'] . '">
                     <button class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
 <input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
 <input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">

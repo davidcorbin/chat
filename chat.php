@@ -59,7 +59,14 @@ function timeconvert($ptime) {
 	
 		// If post is my me
 		if ($chat[$i]['user'] == $_SESSION['un']) {
-			echo '<li class="right clearfix"><span class="chat-img pull-right"><img src="' . $me[0]['avatar'] . '" alt="User Avatar" class="img-circle avatar" /><!--<img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />//--></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
+		
+			if ($me[0]['avatar']=="") {
+				$avatar = "http://placehold.it/50/FA6F57/fff&text=ME";
+			}
+			else {
+				$avatar = $me[0]['avatar'];
+			}
+			echo '<li class="right clearfix"><span class="chat-img pull-right"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
 			echo $chat[$i]['user'];
 			echo '</strong><small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
