@@ -18,7 +18,10 @@ $user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['
 
 if ( !empty($_POST) && $_POST['link']!="" ) {
 	$database->query("UPDATE `logins` SET `avatar`='" .$_POST['link'] . "' WHERE username='" . $_SESSION['un'] . "'");
+	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 }
+
+$avatar = $user[0]['avatar']==""?"http://placehold.it/50/FA6F57/fff&text=ME":$user[0]['avatar'];
 
 $content = '
 	<div class="row">
@@ -31,7 +34,7 @@ $content = '
                 <div class="form-group">
                   <label for="upload" class="col-lg-2 control-label">Avatar</label>
                   <div class="col-lg-10 col-lg-offset-2">
-                    <img src="' . $user[0]['avatar'] . '" class="img-circle avatar">
+                    <img src="' . $avatar . '" class="img-circle avatar">
                     <button class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
 <input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
 <input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
