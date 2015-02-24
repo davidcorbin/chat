@@ -29,6 +29,11 @@ if (!empty($_POST)) {
 		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That username is already taken. Please choose another one.'));
 	}
 	
+	// Validate email
+	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please use a valid email!'));
+	}
+	
 	// Do the database query
 	else {
 		$database->query("INSERT INTO `logins`(`username`, `password`, `email`, `type`) VALUES ('" .$_POST['username'] . "', PASSWORD('" . $_POST['password'] . "'),'" . $_POST['email'] . "', 'user')");

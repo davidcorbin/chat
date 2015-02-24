@@ -80,7 +80,7 @@ function timeconvert($ptime) {
 		
 			$chat_user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $chat[$i]['user'] . "'");
 		
-			if ($chat_user[0]['avatar']=="") {
+			if (empty($chat_user) || $chat_user[0]['avatar']=="") {
 				$avatar = "http://placehold.it/50/55C1E7/fff&text=U";
 			}
 			else {
