@@ -30,7 +30,7 @@ $content .= '
 	<div class="row">
         <div class="col-lg-6">
           <div class="well">
-            <form class="form-horizontal" method="post" action="settings.php" autocomplete="off">
+            <form class="form-horizontal" method="post" action="settings" autocomplete="off">
               <fieldset>
                 <legend>Settings</legend>
 

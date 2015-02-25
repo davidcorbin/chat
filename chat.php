@@ -118,7 +118,7 @@ $info = '
                     </ul>
                 </div>
                 <div class="panel-footer">
-<form method="post" action="chat.php" onsubmit="return send(this);">
+<form method="post" action="chat" onsubmit="return send(this);">
                     <div class="input-group">
                         <input name="sendbutton" id="sendbutton" type="text" class="form-control input-sm" placeholder="Type your message here..." />
                         <span class="input-group-btn">
@@ -157,7 +157,7 @@ $info = '
             var get = function() {
 
                 $.ajax({
-                    url: "chat.php",
+                    url: "chat",
                     data: "Update",
                     type: "get",
                     cache: "false",
