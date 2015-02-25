@@ -14,6 +14,9 @@ $database = new db;
 require_once('class.html.php');
 $html = new html;
 
+require_once('class.mail.php');
+$mail = new mail;
+
 // If there is form data being sent
 if (!empty($_POST)) {
 	$rows = $database->rows("SELECT * FROM logins WHERE username = '" . $database->escape($_POST['username']) . "'");
@@ -37,6 +40,7 @@ if (!empty($_POST)) {
 	// Do the database query
 	else {		
 		$database->query("INSERT INTO `logins`(`username`, `password`, `email`, `type`) VALUES ('" .$database->escape($_POST['username']) . "', PASSWORD('" . $database->escape($_POST['password']) . "'),'" . $database->escape($_POST['email']) . "', 'user')");
+		$mail->signupmail($database->escape($_POST['email']), $database->escape($_POST['username']));
 		$html->login('newuser');
 	}
 }
