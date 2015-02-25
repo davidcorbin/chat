@@ -67,6 +67,9 @@ function timeconvert($ptime) {
 				$avatar = $me[0]['avatar'];
 			}
 			echo '<li class="right clearfix"><span class="chat-img pull-right"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
+			
+			// If admin, show icon in front of name
+			echo $me[0]['type']=="admin"?'<span class="glyphicon glyphicon-flash" style="color:black;"></span>':'';
 			echo $chat[$i]['user'];
 			echo '</strong><small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
@@ -90,6 +93,9 @@ function timeconvert($ptime) {
 			echo '<li class="left clearfix"><span class="chat-img pull-left"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></span><div class="chat-body clearfix"><div class="header"><small class=" text-muted"><span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
 			echo '</small><strong class="pull-right primary-font">';
+			
+			// If admin show icon in front of name
+			echo !empty($chat_user) && $chat_user[0]['type']=="admin"?'<span class="glyphicon glyphicon-flash" style="color:black;"></span>':'';
 			echo $chat[$i]['user'];
 			echo '</strong></div><p>';
 			echo htmlspecialchars($chat[$i]['data']);
@@ -105,8 +111,7 @@ $info = '
         <div class="col-lg-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    FRC Chat
-                    <span class="pull-right"><a href="login.php" style="color: white;">Logout</a></span>
+                    <span class="glyphicon glyphicon-comment"></span>
                 </div>
                 <div class="panel-body">
                     <ul class="chat">
