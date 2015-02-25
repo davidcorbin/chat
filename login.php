@@ -14,8 +14,11 @@ $html = new html;
 if (isset($_POST["un"]) && isset($_POST["pw"])) {
 	$check = $database->auth($_POST["un"], $_POST["pw"]);
 	if ($check) {
+		// Set session vars
 		$_SESSION['un'] = $_POST["un"];
 		$_SESSION['pw'] = $_POST["pw"];
+		
+		// Redirect 
 		header("Location: chat.php");
 	}
 	else {		
@@ -26,4 +29,3 @@ if (isset($_POST["un"]) && isset($_POST["pw"])) {
 else {
 	$html->login("");
 }
-?>

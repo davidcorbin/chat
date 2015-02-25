@@ -16,14 +16,17 @@ $html = new html;
 
 $user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 
-if ( !empty($_POST) && $_POST['link']!="" ) {
+$content = "";
+
+if (!empty($_POST) && $_POST['link']!="") {
 	$database->query("UPDATE `logins` SET `avatar`='" .$_POST['link'] . "' WHERE username='" . $_SESSION['un'] . "'");
 	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
+	$content .= $html->alertsuccess("Updated avatar!");
 }
 
 $avatar = $user[0]['avatar']==""?"http://placehold.it/50/FA6F57/fff&text=ME":$user[0]['avatar'];
 
-$content = '
+$content .= '
 	<div class="row">
         <div class="col-lg-6">
           <div class="well">
