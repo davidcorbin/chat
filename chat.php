@@ -23,7 +23,7 @@ if (!isset($check)) {
 
 
 if (!empty($_POST)) {
-	$database->query("INSERT INTO `chat`(`data`, `user`, `date`) VALUES ('" . $_POST['sendbutton'] . "','" . $_SESSION['un'] . "','" . time() . "')");
+	$database->query("INSERT INTO `chat`(`data`, `user`, `date`) VALUES ('" . $database->escape($_POST['sendbutton']) . "','" . $_SESSION['un'] . "','" . time() . "')");
 }
 
 

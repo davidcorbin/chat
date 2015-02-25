@@ -16,7 +16,7 @@ $html = new html;
 
 // If there is form data being sent
 if (!empty($_POST)) {
-	$rows = $database->rows("SELECT * FROM logins WHERE username = '" . $_POST['username'] . "'");
+	$rows = $database->rows("SELECT * FROM logins WHERE username = '" . $database->escape($_POST['username']) . "'");
 	
 	// If both forms aren't filled in
 	if ($_POST['username'] == "" || $_POST['password'] == "" || $_POST['email'] == "") {
@@ -35,8 +35,8 @@ if (!empty($_POST)) {
 	}
 	
 	// Do the database query
-	else {
-		$database->query("INSERT INTO `logins`(`username`, `password`, `email`, `type`) VALUES ('" .$_POST['username'] . "', PASSWORD('" . $_POST['password'] . "'),'" . $_POST['email'] . "', 'user')");
+	else {		
+		$database->query("INSERT INTO `logins`(`username`, `password`, `email`, `type`) VALUES ('" .$database->escape($_POST['username']) . "', PASSWORD('" . $database->escape($_POST['password']) . "'),'" . $database->escape($_POST['email']) . "', 'user')");
 		$html->login('newuser');
 	}
 }
