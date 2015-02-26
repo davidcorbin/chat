@@ -8,6 +8,7 @@ echo '
 <head>
 <meta charset="utf-8">
 <title>FRC Chat</title>
+<meta name="google-site-verification" content="jqrDMrsdhpyYvJW-39xEtOWIzArtUW8dnd7Lti5XPDY" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="css/bootstrap.css" media="screen">
 <link rel="stylesheet" href="css/bootswatch.min.css">
@@ -63,6 +64,18 @@ body {padding-top:70px;}
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootswatch.js"></script>
+' . "
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-60172009-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+" . '
 </body>
 </html>
 ';
