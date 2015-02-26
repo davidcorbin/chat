@@ -5,6 +5,16 @@ $form = '
 <div class="row">
     <div class="col-lg-12">
         <div class="well">
+            <h3>Welcome to FRC Chat</h3>
+            <p>Now fully supporting mobile and tablet devices.</p>
+            <a class="btn btn-primary" href="adduser">Signup</a> or login below
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="well">
             <form class="form-horizontal" method="post" action="login">
                 <fieldset>
                     <legend>Login or <a href="adduser.php">Create Username</a></legend>
