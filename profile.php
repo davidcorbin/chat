@@ -9,3 +9,7 @@ require_once('class.html.php');
 $html = new html;
 
 print_r($_GET);
+
+$user = "";
+
+$html->profile($user);
