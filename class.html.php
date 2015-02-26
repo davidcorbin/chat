@@ -28,6 +28,9 @@ class html {
 		$this->main($info);
 	}
 	
+	public function profile($user) {
+		$this->main($user);
+	}
 		
 	public function adduser($error) {
 		include("html/adduser.inc");
