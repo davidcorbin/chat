@@ -8,8 +8,30 @@ $database = new db;
 require_once('class.html.php');
 $html = new html;
 
-print_r($_GET);
+// Get first GET key and escape
+$user = $database->escape(key($_GET));
 
-$user = "";
+$userdata = $database->fetch("SELECT * FROM `logins` WHERE username = '" . $user . "'");
+
+// If logged in and looking at my profile
+if (isset($_SESSION['un']) && $_SESSION['un']==$userdata[0]['username']) {
+	$avatar = $userdata[0]['avatar']!=""?$userdata[0]['avatar']:"http://placehold.it/50/FA6F57/fff&text=ME";
+}
+else {
+	$avatar = $userdata[0]['avatar']!=""?$userdata[0]['avatar']:"http://placehold.it/50/55C1E7/fff&text=U";
+}
+
+$user = '
+
+<div class="list-group">
+    <a class="list-group-item active">' . $userdata[0]['username'] . '</a>
+    <a class="list-group-item">
+        <img src="' . $avatar . '" class="img-circle" style="width:100px; margin: auto; display:block;">
+    <br>
+Team: ' . $userdata[0]['team_num'] . '
+    </a>
+</div>
+
+';
 
 $html->profile($user);
