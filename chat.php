@@ -26,9 +26,9 @@ if (!empty($_POST) && isset($_POST['sendbutton'])) {
 	$database->query("INSERT INTO `chat`(`data`, `user`, `date`) VALUES ('" . $database->escape($_POST['sendbutton']) . "','" . $_SESSION['un'] . "','" . time() . "')");
 }
 
+// Update chat window content
+elseif (!empty($_GET) && isset($_GET['Update'])) {
 
-elseif (!empty($_GET)) {
-	
 	// Function for converting chat message time to "minutes ago"
 	function timeconvert($ptime) {
 		$etime = time() - $ptime;
@@ -52,11 +52,15 @@ elseif (!empty($_GET)) {
 		}
 	}
 
+	// Fetch database values for latest comments and user data
 	$chat = $database->fetch("SELECT * FROM `chat` ORDER BY date DESC LIMIT 50");
 	$me = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 	
-	for ($i = 0; $i < count($chat); $i++) {
 	
+	// Set session var for latest update from client
+	$_SESSION['latest_update'] = $chat[0]["id"];
+	
+	for ($i = 0; $i < count($chat); $i++) {
 		// If post is my me
 		if ($chat[$i]['user'] == $_SESSION['un']) {
 		
