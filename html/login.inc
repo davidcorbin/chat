@@ -3,17 +3,15 @@
 $form = '
 
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-6 col-lg-6">
         <div class="well">
-            <h3>Welcome to FRC Chat</h3>
+            <h2>Welcome to FRC Chat</h2>
             <p>Now fully supporting mobile and tablet devices.</p>
             <a class="btn btn-primary" href="adduser">Signup</a> or login below
         </div>
     </div>
-</div>
 
-<div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-6 col-lg-6">
         <div class="well">
             <form class="form-horizontal" method="post" action="login">
                 <fieldset>

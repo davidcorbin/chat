@@ -3,7 +3,7 @@
 $form = '
 
 <div class="row">
-    <div class="col-lg-6">
+    <div class="col-lg-6 col-centered">
         <div class="well">
             <form class="form-horizontal" method="post" action="adduser" autocomplete="off">
                 <fieldset>

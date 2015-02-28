@@ -12,6 +12,7 @@ echo '
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="css/bootstrap.css" media="screen">
 <link rel="stylesheet" href="css/bootswatch.min.css">
+<link rel="stylesheet" href="css/style.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -45,6 +46,7 @@ echo '
 echo isset($_SESSION["un"])?'
         <div class="collapse navbar-collapse" id="navbar-toggle">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="chat">Chat</a></li>
                 <li><a href="settings">Settings</a></li>
                 <li><a href="login">Logout</a></li>
             </ul>
