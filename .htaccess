@@ -10,3 +10,13 @@ RewriteRule ^(.+)\.php$ http://leapctf.siteground.net/chat/$1 [R=301,L]
 
 # Resolve .php file for extensionless php urls
 RewriteRule ^([^/.]+)$ $1.php [L]
+
+<filesMatch "\.(php|htm|js|css)$">
+  FileETag None
+  <ifModule mod_headers.c>
+     Header unset ETag
+     Header set Cache-Control "max-age=0, no-cache, no-store, must-revalidate"
+     Header set Pragma "no-cache"
+     Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
+  </ifModule>
+</filesMatch>
