@@ -17,8 +17,7 @@ echo '
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script><script 
-src="http://cdnjs.cloudflare.com/ajax/libs/fastclick/0.6.7/fastclick.min.js"></script>
+<script src="js/respond.min.js"></script>
 <![endif]-->
 </head>
 
@@ -66,6 +65,7 @@ body {padding-top:70px;}
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/bootswatch.js"></script>
+<script src="js/scripts.js"></script>
 ' . "
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
