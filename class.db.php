@@ -4,8 +4,9 @@ class db {
 	public $dbh;
 	
 	public function __construct() {
-		$this->dbh = mysqli_connect("localhost", "leapctf3_chat", "chat7") or die("Cannot connect, try again later!");
-		mysqli_select_db($this->dbh, "leapctf3_chat") or die("Database doesn't exist");
+		require_once("dbconf.php");
+		$this->dbh = mysqli_connect($mysql_host, $mysql_user, $mysql_pass) or die("Cannot connect, try again later!");
+		mysqli_select_db($this->dbh, $mysql_db) or die("Database doesn't exist");
 		if (!$this->dbh->set_charset("utf8")) {
 			printf("Error loading character set utf8: %s\n", $this->dbh->error);
 		}
