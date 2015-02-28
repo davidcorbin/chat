@@ -23,13 +23,15 @@ else {
 
 $user = '
 
-<div class="list-group">
-    <a class="list-group-item active">' . $userdata[0]['username'] . '</a>
-    <a class="list-group-item">
-        <img src="' . $avatar . '" class="img-circle" style="width:100px; margin: auto; display:block;">
-    <br>
-Team: ' . $userdata[0]['team_num'] . '
-    </a>
+<div class="col-md-8 col-lg-6 col-centered">
+    <div class="list-group">
+        <a class="list-group-item active">' . $userdata[0]['username'] . '</a>
+        <a class="list-group-item">
+            <img src="' . $avatar . '" class="img-circle" style="width:100px; margin: auto; display:block;">
+        <br>
+        Team: ' . $userdata[0]['team_num'] . '
+        </a>
+    </div>
 </div>
 
 ';
