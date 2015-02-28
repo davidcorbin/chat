@@ -56,6 +56,13 @@ elseif (!empty($_GET) && isset($_GET['Update'])) {
 	$chat = $database->fetch("SELECT * FROM `chat` ORDER BY date DESC LIMIT 50");
 	$me = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 	
+	/*
+	// If no new posts
+	if (isset($_SESSION['latest_update']) && $_SESSION['latest_update']==$chat[0]["id"]) {
+		echo "S";
+		exit();
+	}
+	*/
 	
 	// Set session var for latest update from client
 	$_SESSION['latest_update'] = $chat[0]["id"];
@@ -112,7 +119,7 @@ else {
 
 $info = '
    <div class="row">
-        <div class="col-lg-12">
+        <div class="col-md-8 col-lg-6 col-centered">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-comment"></span>
@@ -171,7 +178,9 @@ $info = '
                     type: "get",
                     cache: "false",
                     success: function(data) {
-                        $(".chat").html(data);
+                        if (data!="S") {
+                            $(".chat").html(data);
+                        }
                     }
                 });
 
@@ -182,74 +191,8 @@ setInterval(function(){get();},2000);
 window.onload = function(){get();}
         </script>
     
-    <style>
-.avatar {
-    width:40px;
-    height:40px;
-}
-
-    .chat 
-{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.chat li
-{
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px dotted #B3A9A9;
-}
-
-.chat li.left .chat-body
-{
-    margin-left: 60px;
-}
-
-.chat li.right .chat-body
-{
-    margin-right: 60px;
-}
+'; 
 
 
-.chat li .chat-body p
-{
-    margin: 0;
-    color: #777777;
-}
-
-.panel .slidedown .glyphicon, .chat .glyphicon
-{
-    margin-right: 5px;
-}
-
-.panel-body
-{
-    overflow-y: scroll;
-    height: 60vh;
-    -webkit-overflow-scrolling:touch;
-}
-
-::-webkit-scrollbar-track
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar
-{
-    width: 12px;
-    background-color: #F5F5F5;
-}
-
-::-webkit-scrollbar-thumb
-{
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-}
-    </style>'; 
-
-
-$html->chat($info);
+	$html->chat($info);
 }
