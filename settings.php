@@ -26,64 +26,6 @@ if (!empty($_POST) && $_POST['link']!="") {
 
 $avatar = $user[0]['avatar']==""?"http://placehold.it/50/FA6F57/fff&text=ME":$user[0]['avatar'];
 
-$content .= '
-	<div class="row">
-        <div class="col-lg-6">
-          <div class="well">
-            <form class="form-horizontal" method="post" action="settings" autocomplete="off">
-              <fieldset>
-                <legend>Settings</legend>
-
-                <div class="form-group">
-                  <label for="upload" class="col-lg-2 control-label">Avatar</label>
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <img src="' . $avatar . '" class="img-circle avatar">
-                    <button class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
-<input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
-<input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
-                  </div>
-                </div>
-                
-                <div class="form-group">
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-primary">Save</button>       
-                  </div>
-                </div>
-
-              </fieldset>
-            </form>
-          </div>
-        </div>
-      </div>
-
-<style>
-.avatar {
-    width:40px;
-    height:40px;
-}
-</style>
-
-<script>
-function upload(file) {
-	if (!file || !file.type.match(/image.*/)) return;
-	document.getElementsByClassName("upload")[0].innerHTML = "Uploading...";
-	var fd = new FormData();
-	fd.append("image", file);
-	fd.append("key", "6528448c258cff474ca9701c5bab6927");
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://api.imgur.com/2/upload.json"); 
-	xhr.onload = function() {
-		document.querySelector("#link").value = JSON.parse(xhr.responseText).upload.links.original;
-		document.getElementsByClassName("upload")[0].innerHTML = "Upload";
-		document.querySelector(".avatar").src = JSON.parse(xhr.responseText).upload.links.original;
-	}
-	xhr.send(fd);
-}
-
-function clickcall() {
-	document.querySelector("#image").click();
-}
-</script>
-';
+require_once("html/settings.inc");
 
 $html->settings($content);
