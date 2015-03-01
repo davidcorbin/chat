@@ -13,6 +13,11 @@ $user = $database->escape(key($_GET));
 
 $userdata = $database->fetch("SELECT * FROM `logins` WHERE username = '" . $user . "'");
 
+// Check if user exists
+if (empty($userdata)) {
+	$html->profile("Username doesn't exist. The account must have been deleted or removed.");
+}
+
 // If logged in and looking at my profile
 if (isset($_SESSION['un']) && $_SESSION['un']==$userdata[0]['username']) {
 	$avatar = $userdata[0]['avatar']!=""?$userdata[0]['avatar']:"http://placehold.it/50/FA6F57/fff&text=ME";

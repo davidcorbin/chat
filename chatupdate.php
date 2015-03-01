@@ -10,14 +10,14 @@ $html = new html;
 
 //Check for session vars
 if (!isset($_SESSION['un']) || !isset($_SESSION['pw'])) {
-	header("Location: login.php");
+	echo "Error in your session! Try refreshing.";
 	die();
 }
 
 //Authorize session credentials
 $check = $database->auth($_SESSION["un"], $_SESSION["pw"]);
 if (!isset($check)) {
-	header("Location: login.php");
+	echo "Error in your session! Try refreshing.";
 	die();
 }
 
