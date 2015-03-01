@@ -1,41 +1,34 @@
 <?php
 
 $content .= '
+
 	<div class="row">
-        <div class="col-lg-6">
-          <div class="well">
+    <div class="col-lg-6">
+        <div class="well">
             <form class="form-horizontal" method="post" action="settings" autocomplete="off">
-              <fieldset>
-                <legend>Settings</legend>
+                <fieldset>
+                    <legend>Settings</legend>
 
-                <div class="form-group">
-                  <label for="upload" class="col-lg-2 control-label">Avatar</label>
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <img src="' . $avatar . '" class="img-circle avatar">
-                    <button class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
-<input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
-<input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
-                  </div>
-                </div>
+                    <div class="form-group">
+                        <label for="upload" class="col-lg-2 control-label">Avatar</label>
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <img src="' . $avatar . '" class="img-circle avatar">
+                            <button class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
+                            <input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
+                            <input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
+                        </div>
+                    </div>
                 
-                <div class="form-group">
-                  <div class="col-lg-10 col-lg-offset-2">
-                    <button type="submit" class="btn btn-primary">Save</button>       
-                  </div>
-                </div>
-
-              </fieldset>
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button type="submit" class="btn btn-primary">Save</button>       
+                        </div>
+                    </div>
+                </fieldset>
             </form>
-          </div>
         </div>
-      </div>
-
-<style>
-.avatar {
-    width:40px;
-    height:40px;
-}
-</style>
+    </div>
+</div>
 
 <script>
 function upload(file) {
