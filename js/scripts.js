@@ -19,7 +19,7 @@ var send = function(formEl) {
 
 var get = function() {
     $.ajax({
-        url: "chat",
+        url: "chatupdate",
         data: "Update",
         type: "get",
         cache: "false",
