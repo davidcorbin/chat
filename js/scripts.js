@@ -24,13 +24,8 @@ var get = function() {
         type: "get",
         cache: "false",
         success: function(data) {
-            if (data!="S") {
                 $(".chat").html(data);
-            }
         }
     });
     return false;
 }
-
-setInterval(function(){get();},2000);
-window.onload = function(){get();}
