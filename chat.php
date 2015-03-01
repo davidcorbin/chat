@@ -60,7 +60,8 @@ $info = '
     </div>
 
         <script type="text/javascript">
-
+setInterval(function(){get();},4000);
+window.onload = function(){get();}
         </script>
     
 '; 
