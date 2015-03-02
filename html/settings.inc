@@ -2,7 +2,7 @@
 
 $content .= '
 
-	<div class="row">
+<div class="row">
     <div class="col-lg-6">
         <div class="well">
             <form class="form-horizontal" method="post" action="settings" autocomplete="off">
@@ -18,6 +18,20 @@ $content .= '
                             <input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="inputEmail" class="col-lg-2 control-label">Username</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="inputEmail" placeholder="Username" name="un">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-lg-10 col-lg-offset-2">
+                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteaccount">Delete Account</button>       
+                        </div>
+                    </div>
+
                 
                     <div class="form-group">
                         <div class="col-lg-10 col-lg-offset-2">
@@ -30,25 +44,25 @@ $content .= '
     </div>
 </div>
 
-<script>
-function upload(file) {
-	if (!file || !file.type.match(/image.*/)) return;
-	document.getElementsByClassName("upload")[0].innerHTML = "Uploading...";
-	var fd = new FormData();
-	fd.append("image", file);
-	fd.append("key", "6528448c258cff474ca9701c5bab6927");
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", "http://api.imgur.com/2/upload.json"); 
-	xhr.onload = function() {
-		document.querySelector("#link").value = JSON.parse(xhr.responseText).upload.links.original;
-		document.getElementsByClassName("upload")[0].innerHTML = "Upload";
-		document.querySelector(".avatar").src = JSON.parse(xhr.responseText).upload.links.original;
-	}
-	xhr.send(fd);
-}
 
-function clickcall() {
-	document.querySelector("#image").click();
-}
-</script>
+
+
+<div class="modal fade" id="deleteaccount" tabindex="-1" role="dialog" aria-labelledby="deleteaccountlabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="deleteaccountlabel">Delete account</h4>
+            </div>
+            <div class="modal-body">
+Are you sure you wish to delete your account?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <a type="button" class="btn btn-danger" href="settings?delete">Delete account</a>
+            </div>
+        </div>
+    </div>
+</div>
+
 ';
