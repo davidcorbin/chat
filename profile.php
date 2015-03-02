@@ -43,6 +43,8 @@ $user = '
         <br>
         Team: ' . $userdata[0]['team_num'] . '
         <br>
+        Created: ' . timeconvert($userdata[0]['created_at']) . '
+        <br>
         Profile views: ' . $userdata[0]['profile_view_count'] . '
         <br>
         Number of posts: ' . $userdata[0]['post_count'] . '
