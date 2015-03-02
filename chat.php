@@ -24,6 +24,7 @@ if (!isset($check)) {
 // New chat message sent
 if (!empty($_POST) && isset($_POST['sendbutton'])) {
 	$database->query("INSERT INTO `chat`(`data`, `user`, `date`) VALUES ('" . $database->escape($_POST['sendbutton']) . "','" . $_SESSION['un'] . "','" . time() . "')");
+	$database->query("UPDATE logins SET `post_count` = post_count + 1 WHERE username = '" . $_SESSION['un'] . "'");
 }
 
 
