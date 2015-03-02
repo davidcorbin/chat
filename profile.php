@@ -44,6 +44,8 @@ $user = '
         Team: ' . $userdata[0]['team_num'] . '
         <br>
         Profile views: ' . $userdata[0]['profile_view_count'] . '
+        <br>
+        Number of posts: ' . $userdata[0]['post_count'] . '
         </a>
     </div>
 </div>
