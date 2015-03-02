@@ -25,6 +25,13 @@ if (!empty($_POST) && $_POST['link']!="") {
 	$content .= $html->alertsuccess("Updated avatar!");
 }
 
+// If new team number
+if (!empty($_POST) && $_POST['teamnumber']!="" && $_POST['teamnumber']!=$user[0]['team_num']) {
+	$database->query("UPDATE `logins` SET `team_num`='" . $database->escape($_POST['teamnumber']) . "' WHERE username='" . $_SESSION['un'] . "'");
+	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
+	$content .= $html->alertsuccess("Updated team number!");
+}
+
 // If account is to be deleted
 if (key($_GET)=="delete") {
 	$database->query("DELETE FROM `logins` WHERE `username`='" . $database->escape($_SESSION["un"]) . "'");
@@ -33,6 +40,7 @@ if (key($_GET)=="delete") {
 }
 
 $avatar = $user[0]['avatar']==""?"http://placehold.it/50/FA6F57/fff&text=ME":$user[0]['avatar'];
+$teamnumber = $user[0]['team_num']==0?'placeholder="eg 1234"':'value='.$user[0]['team_num'];
 
 require_once("html/settings.inc");
 
