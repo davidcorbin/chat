@@ -39,7 +39,7 @@ if (!empty($_POST)) {
 	
 	// Do the database query
 	else {		
-		$database->query("INSERT INTO `logins`(`username`, `password`, `email`, `type`, `post_count`, `profile_view_count`) VALUES ('" .$database->escape($_POST['username']) . "', PASSWORD('" . $database->escape($_POST['password']) . "'),'" . $database->escape($_POST['email']) . "', 'user', 0, 0)");
+		$database->query("INSERT INTO `logins`(`username`, `password`, `email`, `type`, `post_count`, `profile_view_count`, `created_at`) VALUES ('" .$database->escape($_POST['username']) . "', PASSWORD('" . $database->escape($_POST['password']) . "'),'" . $database->escape($_POST['email']) . "', 'user', 0, 0, " . time() . ")");
 		$mail->signupmail($database->escape($_POST['email']), $database->escape($_POST['username']));
 		$html->login('newuser');
 	}
