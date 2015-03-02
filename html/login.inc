@@ -7,7 +7,7 @@ $form = '
         <div class="well">
             <h2>Welcome to FRC Chat</h2>
             <p>Now fully supporting mobile and tablet devices.</p>
-            <a class="btn btn-primary" href="adduser">Signup</a> or login below
+            <a class="btn btn-primary btn-lg" href="adduser">Signup</a> or login below
         </div>
     </div>
 
