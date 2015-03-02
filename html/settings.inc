@@ -11,31 +11,32 @@ $content .= '
 
                     <div class="form-group">
                         <label for="upload" class="col-lg-2 control-label">Avatar</label>
-                        <div class="col-lg-10 col-lg-offset-2">
+                        <div class="col-lg-10">
                             <img src="' . $avatar . '" class="img-circle avatar">
                             <button class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
-                            <input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
-                            <input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
                         </div>
+                        <input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
+                        <input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
                     </div>
 
                     <div class="form-group">
-                        <label for="inputEmail" class="col-lg-2 control-label">Username</label>
+                        <label for="teamnumber" class="col-lg-2 control-label">Team Number</label>
                         <div class="col-lg-10">
-                            <input type="text" class="form-control" id="inputEmail" placeholder="Username" name="un">
+                            <input type="text" class="form-control" id="teamnumber" name="teamnumber" ' . $teamnumber . '>
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteaccount">Delete Account</button>       
-                        </div>
-                    </div>
-
                 
                     <div class="form-group">
-                        <div class="col-lg-10 col-lg-offset-2">
-                            <button type="submit" class="btn btn-primary">Save</button>       
+                        <div class="col-lg-10">
+                            <button type="submit" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+
+<hr>
+
+                    <div class="form-group">
+                        <div class="col-lg-10">
+                            <button class="btn btn-danger" type="button" data-toggle="modal" data-target="#deleteaccount">Delete Account</button>
                         </div>
                     </div>
                 </fieldset>
