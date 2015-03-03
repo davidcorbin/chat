@@ -19,7 +19,7 @@ if (empty($userdata)) {
 }
 
 // Add profile view
-if ($_SESSION['un']!=$userdata[0]['username']) {
+if (!isset($_SESSION['un']) || $_SESSION['un']!=$userdata[0]['username']) {
 	$database->query("UPDATE logins SET `profile_view_count` = profile_view_count + 1 WHERE username = '" . $userdata[0]['username'] . "'");
 	// Reupdate user database data
 	$userdata = $database->fetch("SELECT * FROM `logins` WHERE username = '" . $user . "'");
@@ -39,9 +39,17 @@ $user = '
     <div class="list-group">
         <a class="list-group-item active">' . $userdata[0]['username'] . '</a>
         <a class="list-group-item">
-            <img src="' . $avatar . '" class="img-circle" style="width:100px; margin: auto; display:block;">
+            <img src="' . $avatar . '" class="img-circle" style="width:100px; margin: auto; display:block;">';
+
+$user .= $userdata[0]['team_num']!="0"?'
         <br>
-        Team: ' . $userdata[0]['team_num'] . '
+        Team: ' . $userdata[0]['team_num']:"";
+
+$user .= $userdata[0]['position']!=""?'
+        <br>
+        Position: ' . $userdata[0]['position']:"";
+
+$user .= '
         <br>
         Created: ' . timeconvert($userdata[0]['created_at']) . '
         <br>
