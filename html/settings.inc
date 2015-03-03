@@ -25,6 +25,13 @@ $content .= '
                             <input type="text" class="form-control" id="teamnumber" name="teamnumber" ' . $teamnumber . '>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="teamposition" class="col-lg-2 control-label">Team Position</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="teamposition" name="teamposition" ' . $teamposition . '>
+                        </div>
+                    </div>
                 
                     <div class="form-group">
                         <div class="col-lg-10">
@@ -32,7 +39,7 @@ $content .= '
                         </div>
                     </div>
 
-<hr>
+                    <hr>
 
                     <div class="form-group">
                         <div class="col-lg-10">
