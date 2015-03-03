@@ -8,7 +8,6 @@ echo '
 <head>
 <meta charset="utf-8">
 <title>FRC Chat</title>
-<meta name="google-site-verification" content="jqrDMrsdhpyYvJW-39xEtOWIzArtUW8dnd7Lti5XPDY" />
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 <link rel="stylesheet" href="css/bootstrap.css" media="screen">
 <link rel="stylesheet" href="css/bootswatch.min.css">
@@ -45,6 +44,7 @@ echo '
 echo isset($_SESSION["un"])?'
         <div class="collapse navbar-collapse" id="navbar-toggle">
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="profile?'.$_SESSION['un'].'">'.$_SESSION['un'].'</a></li>
                 <li><a href="chat">Chat</a></li>
                 <li><a href="settings">Settings</a></li>
                 <li><a href="login">Logout</a></li>
