@@ -19,8 +19,9 @@ $mail = new mail;
 
 // If there is form data being sent
 if (!empty($_POST)) {
-	$rows = $database->rows("SELECT * FROM logins WHERE username = '" . $database->escape($_POST['username']) . "'");
-	
+	$username_rows = $database->rows("SELECT * FROM logins WHERE username = '" . $database->escape($_POST['username']) . "'");
+	$email_rows = $database->rows("SELECT * FROM logins WHERE email = '" . $database->escape($_POST['email']) . "'");
+
 	// If both forms aren't filled in
 	if ($_POST['username'] == "" || $_POST['password'] == "" || $_POST['email'] == "") {
 		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please include username, email, and password.'));
@@ -28,8 +29,13 @@ if (!empty($_POST)) {
 	}
 	
 	// If that username is already taken in the database
-	if ($rows == 1) {
-		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That username is already taken. Please choose another one.'));
+	if ($username_rows == 1) {
+		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That USERNAME is already taken. Please choose another one.'));
+	}
+
+	// If that email is already taken in the database
+	if ($email_rows == 1) {
+		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That EMAIL is already taken. Please choose another one.'));
 	}
 	
 	// Validate email
