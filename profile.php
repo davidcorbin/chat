@@ -38,7 +38,7 @@ $user = '
 <div class="col-md-8 col-lg-6 col-centered">
     <div class="list-group">
         <a class="list-group-item active">' . $userdata[0]['username'] . '</a>
-        <a class="list-group-item">
+        <div class="list-group-item">
             <img src="' . $avatar . '" class="img-circle" style="width:100px; margin: auto; display:block;">';
 
 $user .= $userdata[0]['team_num']!="0"?'
@@ -49,6 +49,14 @@ $user .= $userdata[0]['position']!=""?'
         <br>
         Position: ' . $userdata[0]['position']:"";
 
+$user .= $userdata[0]['location']!=""?'
+        <br>
+        Location: ' . $userdata[0]['location']:"";
+
+$user .= $userdata[0]['website']!=""?'
+        <br>
+        Site: <a href="' . $userdata[0]['website'] . '">' . $userdata[0]['website'] . '</a>':"";
+
 $user .= '
         <br>
         Created: ' . timeconvert($userdata[0]['created_at']) . '
@@ -56,7 +64,7 @@ $user .= '
         Profile views: ' . $userdata[0]['profile_view_count'] . '
         <br>
         Number of posts: ' . $userdata[0]['post_count'] . '
-        </a>
+        </div>
     </div>
 </div>
 
