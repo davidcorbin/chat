@@ -55,7 +55,7 @@ $user .= $userdata[0]['location']!=""?'
 
 $user .= $userdata[0]['website']!=""?'
         <br>
-        Site: <a href="' . $userdata[0]['website'] . '">' . $userdata[0]['website'] . '</a>':"";
+        Site: <a target="_blank" href="' . $userdata[0]['website'] . '">' . $userdata[0]['website'] . '</a>':"";
 
 $user .= '
         <br>
