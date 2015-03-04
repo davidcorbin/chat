@@ -50,7 +50,7 @@ if (!empty($_GET) && isset($_GET['Update'])) {
 			else {
 				$avatar = $me[0]['avatar'];
 			}
-			echo '<li class="right clearfix"><span class="chat-img pull-right"><a href="profile?' . $chat[$i]['user'] . '"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></a></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
+			echo '<li class="right clearfix"><span class="chat-img pull-right"><a target="_blank" href="profile?' . $chat[$i]['user'] . '"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></a></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
 			
 			// If admin, show icon in front of name
 			echo $me[0]['type']=="admin"?'<span class="glyphicon glyphicon-flash" style="color:black;"></span>':'';
@@ -74,7 +74,7 @@ if (!empty($_GET) && isset($_GET['Update'])) {
 				$avatar = $chat_user[0]['avatar'];
 			}
 			
-			echo '<li class="left clearfix"><span class="chat-img pull-left"><a href="profile?' . $chat[$i]['user'] . '"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></a></span><div class="chat-body clearfix"><div class="header"><small class="text-muted"><span class="glyphicon glyphicon-time"></span>';
+			echo '<li class="left clearfix"><span class="chat-img pull-left"><a target="_blank" href="profile?' . $chat[$i]['user'] . '"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></a></span><div class="chat-body clearfix"><div class="header"><small class="text-muted"><span class="glyphicon glyphicon-time"></span>';
 			echo timeconvert($chat[$i]['date']);
 			echo '</small><strong class="pull-right primary-font">';
 			
