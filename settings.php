@@ -39,6 +39,29 @@ if (!empty($_POST) && $_POST['teamposition']!="" && $_POST['teamposition']!=$use
 	$content .= $html->alertsuccess("Updated team position!");
 }
 
+// If new user location
+if (!empty($_POST) && $_POST['userlocation']!="" && $_POST['userlocation']!=$user[0]['location']) {
+	$database->query("UPDATE `logins` SET `location`='" . $database->escape($_POST['userlocation']) . "' WHERE username='" . $_SESSION['un'] . "'");
+	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
+	$content .= $html->alertsuccess("Updated user location!");
+}
+
+// If new user website
+if (!empty($_POST) && $_POST['website']!="" && $_POST['website']!=$user[0]['website']) {
+    // Remove all illegal characters from a url
+    $url = filter_var($_POST['website'], FILTER_SANITIZE_URL);
+
+    // Validate url
+    if (!filter_var($url, FILTER_VALIDATE_URL) === false) {
+    	// Update database
+        $database->query("UPDATE `logins` SET `website`='" . $database->escape($_POST['website']) . "' WHERE username='" . $_SESSION['un'] . "'");
+        $content .= $html->alertsuccess("Updated user website!");
+    } else {
+        $content .= $html->alertdanger("Website not valid! Are you missing http://");
+    }
+	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
+}
+
 // If account is to be deleted
 if (key($_GET)=="delete") {
 	$database->query("DELETE FROM `logins` WHERE `username`='" . $database->escape($_SESSION["un"]) . "'");
@@ -49,6 +72,9 @@ if (key($_GET)=="delete") {
 $avatar = $user[0]['avatar']==""?"http://placehold.it/50/FA6F57/fff&text=ME":$user[0]['avatar'];
 $teamnumber = $user[0]['team_num']==0?'placeholder="eg 1234"':'value='.$user[0]['team_num'];
 $teamposition = $user[0]['position']==""?'placeholder="eg Build/Electrical"':'value="'.$user[0]['position'].'"';
+
+$userlocation = $user[0]['location']==""?'placeholder="eg San Francisco, California"':'value="'.$user[0]['location'].'"';
+$userwebsite = $user[0]['website']==""?'value="http://"':'value="'.$user[0]['website'].'"';
 
 require_once("html/settings.inc");
 
