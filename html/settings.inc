@@ -13,7 +13,7 @@ $content .= '
                         <label for="upload" class="col-lg-2 control-label">Avatar</label>
                         <div class="col-lg-10">
                             <img src="' . $avatar . '" class="img-circle avatar">
-                            <button class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
+                            <button type="button" class="btn btn-primary upload" onclick="clickcall(); return false;">Upload</button>
                         </div>
                         <input style="visibility: collapse; width: 0px; height: 0px;" type="file" onchange="upload(this.files[0])" id="image">
                         <input type="text" name="link" id="link" style="visibility: collapse; width: 0px; height: 0px;">
@@ -30,6 +30,22 @@ $content .= '
                         <label for="teamposition" class="col-lg-2 control-label">Team Position</label>
                         <div class="col-lg-10">
                             <input type="text" class="form-control" id="teamposition" name="teamposition" ' . $teamposition . '>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="userlocation" class="col-lg-2 control-label">Location</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="userlocation" name="userlocation" ' . $userlocation . '>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="website" class="col-lg-2 control-label">Site</label>
+                        <div class="col-lg-10">
+                            <input type="text" class="form-control" id="website" name="website" ' . $userwebsite . '>
                         </div>
                     </div>
                 
