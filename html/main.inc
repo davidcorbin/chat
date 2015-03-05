@@ -1,5 +1,7 @@
 <?php
 
+$root = "/chat";
+
 echo '
 
 <!DOCTYPE html>
@@ -9,14 +11,14 @@ echo '
 <meta charset="utf-8">
 <title>FRC Chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="css/bootstrap.css" media="screen">
-<link rel="stylesheet" href="css/bootswatch.min.css">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="'.$root.'/css/bootstrap.css" media="screen">
+<link rel="stylesheet" href="'.$root.'/css/bootswatch.min.css">
+<link rel="stylesheet" href="'.$root.'/css/style.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
-<script src="js/html5shiv.js"></script>
-<script src="js/respond.min.js"></script>
+<script src="'.$root.'/js/html5shiv.js"></script>
+<script src="'.$root.'/js/respond.min.js"></script>
 <![endif]-->
 </head>
 
@@ -37,17 +39,17 @@ echo isset($_SESSION["un"])?'
 ':"";
 
 echo '
-            <a href="chat.php" class="navbar-brand">FRC Chat <span style="color: red; font-size:small;">BETA</span></a>
+            <a href="'.$root.'/chat.php" class="navbar-brand">FRC Chat <span style="color: red; font-size:small;">BETA</span></a>
         </div>
 ';
 
 echo isset($_SESSION["un"])?'
         <div class="collapse navbar-collapse" id="navbar-toggle">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="profile?'.$_SESSION['un'].'">'.$_SESSION['un'].'</a></li>
-                <li><a href="chat">Chat</a></li>
-                <li><a href="settings">Settings</a></li>
-                <li><a href="login">Logout</a></li>
+                <li><a href="'.$root.'/profile?'.$_SESSION['un'].'">'.$_SESSION['un'].'</a></li>
+                <li><a href="'.$root.'/chat">Chat</a></li>
+                <li><a href="'.$root.'/settings">Settings</a></li>
+                <li><a href="'.$root.'/login">Logout</a></li>
             </ul>
         </div>
 ':"";
@@ -63,9 +65,9 @@ body {padding-top:70px;}
 <div class="container" id="maincontainer">' . $content . '</div>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/bootswatch.js"></script>
-<script src="js/scripts.js"></script>
+<script src="'.$root.'/js/bootstrap.min.js"></script>
+<script src="'.$root.'/js/bootswatch.js"></script>
+<script src="'.$root.'/js/scripts.js"></script>
 ' . "
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
