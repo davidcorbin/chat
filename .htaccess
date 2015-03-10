@@ -20,6 +20,9 @@ RewriteRule ^profile/(.*)$ ./profile.php?$1
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^chat/(.*)$ chat.php?$1 
 
+# 404 error (not found)
+ErrorDocument 404 /chat/error.php?error=404
+ErrorDocument 500 /chat/error.php?error=500
 
 <filesMatch "\.(php|htm|js|css)$">
   FileETag None
