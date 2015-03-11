@@ -21,52 +21,19 @@ if (!isset($check)) {
 	die();
 }
 
+$page = "";
+if (!empty($_GET)) {
+	$page = key($_GET);
+	$_SESSION['chatkey'] = $page;
+}
+
 // New chat message sent
 if (!empty($_POST) && isset($_POST['sendbutton'])) {
 	$database->query("INSERT INTO `chat`(`data`, `user`, `date`) VALUES ('" . $database->escape($_POST['sendbutton']) . "','" . $_SESSION['un'] . "','" . time() . "')");
 	$database->query("UPDATE logins SET `post_count` = post_count + 1 WHERE username = '" . $_SESSION['un'] . "'");
 }
 
-
 else {
-
-$info = '
-   <div class="row">
-        <div class="col-md-8 col-lg-6 col-centered">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <span class="glyphicon glyphicon-comment"></span>
-                </div>
-                <div class="panel-body">
-                    <ul class="chat">
-
-
-
-
-
-                    </ul>
-                </div>
-                <div class="panel-footer">
-<form method="post" action="chat" onsubmit="return send(this);">
-                    <div class="input-group">
-                        <input name="sendbutton" id="sendbutton" type="text" class="form-control input-sm" placeholder="Type your message here..." />
-                        <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
-                        </span>
-                    </div>
-</form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-        <script type="text/javascript">
-setInterval(function(){get();},4000);
-window.onload = function(){get();}
-        </script>
-    
-'; 
-
-
+	require("html/chat.inc");
 	$html->chat($info);
 }
