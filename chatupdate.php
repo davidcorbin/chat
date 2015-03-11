@@ -22,6 +22,7 @@ if (!isset($check)) {
 }
 
 $chat = key($_GET);
+$chat = "chat_".$chat;
 
 // Exit if table doesn't exist
 if (!$database->tableexists($chat)) {
