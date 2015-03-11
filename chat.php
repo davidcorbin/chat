@@ -29,20 +29,22 @@ if (!empty($_GET)) {
 
 // New chat message sent
 if (!empty($_POST) && isset($_POST['sendbutton'])) {
-	$database->query("INSERT INTO `chat`(`data`, `user`, `date`) VALUES ('" . $database->escape($_POST['sendbutton']) . "','" . $_SESSION['un'] . "','" . time() . "')");
+print_r($_POST);
+	$database->query("INSERT INTO `chat_" . $_POST['currentchat'] . "`(`data`, `user`, `date`) VALUES ('" . $database->escape($_POST['sendbutton']) . "','" . $_SESSION['un'] . "','" . time() . "')");
 	$database->query("UPDATE logins SET `post_count` = post_count + 1 WHERE username = '" . $_SESSION['un'] . "'");
+	exit();
 }
 
 // Create new chat table
 if (!empty($_POST) && isset($_POST['newchat'])) {
-	$database->query("CREATE TABLE IF NOT EXISTS `" . $database->escape($_POST['newchat']) . "` (
+	$database->query("CREATE TABLE IF NOT EXISTS `chat_" . $database->escape($_POST['newchat']) . "` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
   `data` varchar(256) NOT NULL,
   `user` varchar(256) NOT NULL,
   `date` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=131;");
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
 	echo "created";
 	exit();
 }
