@@ -5,7 +5,7 @@ $info = '
     <div class="col-md-8 col-lg-6 col-centered">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <span class="glyphicon glyphicon-comment"></span>
+                <span class="glyphicon glyphicon-comment"> ' . $page . '</span>  <span id="chattitle" style="display:inline-block;"></span>
             </div>
             <div class="panel-body">
                 <ul class="chat">
@@ -30,8 +30,8 @@ $info = '
             <a class="list-group-item active">Create or switch to:</a>
             <div class="list-group-item">
                 <div class="input-group">
-                    <form>
-                        <input name="newchat" type="text" class="form-control input-sm" placeholder="DriverStation" id="newchat" />
+                    <form onsubmit="return loadchat(this)">
+                        <input name="newchat" type="text" class="form-control input-sm" value="chat" id="newchat" onkeypress="get()" onchange="get()" oninput="get()" />
                         <span class="input-group-btn">
                             <button class="btn btn-primary btn-sm" style="display:inline-block;">Go</button>
                         </span>
@@ -43,6 +43,8 @@ $info = '
 </div>
 
 <script type="text/javascript">
+var page = "' . $page . '";
+
 setInterval(function(){get();},3000);
 window.onload = function(){get();}
 </script>
