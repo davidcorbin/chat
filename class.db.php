@@ -38,6 +38,15 @@ class db {
 		return mysqli_num_rows($query);
 	}
 	
+	// MYSQL check if table exists
+	public function tableexists($table) {
+		$rows = $this->rows("SHOW TABLES LIKE '" . $table . "'");
+		if ($rows == 1) 
+			return TRUE;
+		else 
+			return FALSE;
+	}
+	
 	// Authorize user
 	public function auth($un, $pw) {
 		$query = $this->fetch("SELECT * FROM logins WHERE username ='" . mysqli_real_escape_string($this->dbh, $un) . "' AND password = PASSWORD('" . mysqli_real_escape_string($this->dbh, $pw) . "')");	
