@@ -33,6 +33,20 @@ if (!empty($_POST) && isset($_POST['sendbutton'])) {
 	$database->query("UPDATE logins SET `post_count` = post_count + 1 WHERE username = '" . $_SESSION['un'] . "'");
 }
 
+// Create new chat table
+if (!empty($_POST) && isset($_POST['newchat'])) {
+	$database->query("CREATE TABLE IF NOT EXISTS `" . $database->escape($_POST['newchat']) . "` (
+  `id` int(12) NOT NULL AUTO_INCREMENT,
+  `data` varchar(256) NOT NULL,
+  `user` varchar(256) NOT NULL,
+  `date` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=131;");
+	echo "created";
+	exit();
+}
+
 else {
 	require("html/chat.inc");
 	$html->chat($info);
