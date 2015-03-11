@@ -4,14 +4,15 @@ var send = function(formEl) {
     }
 
     var url = $(formEl).attr("action");
-    var data = $("#sendbutton").serializeArray();
+    var data = $("#chatmes").serializeArray();
 
     $.ajax({
         url: url,
         data: data,
         type: "post",
-        success: function() {
+        success: function(data) {
             document.getElementById("sendbutton").value = "";
+            get();
         }
     });
     return false;
@@ -32,6 +33,7 @@ var get = function() {
             else {
                 $("#chattitle").text(chatpage);
                 $(".chat").html(data); 
+                document.getElementById("currentchat").value = chatpage;
             }
         }
     });
@@ -68,7 +70,7 @@ function upload(file) {
 }
 
 function clickcall() {
-	document.querySelector("#image").click();
+    document.querySelector("#image").click();
 }
 
 function loadchat(el) {
