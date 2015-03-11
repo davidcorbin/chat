@@ -18,13 +18,34 @@ var send = function(formEl) {
 }
 
 var get = function() {
+    var chatpage = document.getElementById("newchat").value;
     $.ajax({
         url: "chatupdate",
-        data: "Update",
+        data: chatpage,
         type: "get",
         cache: "false",
         success: function(data) {
-                $(".chat").html(data);
+            if (data=="No") {
+                $("#chattitle").text("Chat not found");
+                $(".chat").html("<p>This chat doesn't exist. Would you like to create it?</p><button class='btn btn-default' onclick='createchat()'>Yes</button>");
+            }
+            else {
+                $("#chattitle").text(chatpage);
+                $(".chat").html(data); 
+            }
+        }
+    });
+    return false;
+}
+
+function createchat() {
+    var chatpage = $("#newchat").serializeArray();
+    $.ajax({
+        url: "chat",
+        data: chatpage,
+        type: "post",
+        success: function(data) {
+            alert(data);
         }
     });
     return false;
@@ -48,4 +69,9 @@ function upload(file) {
 
 function clickcall() {
 	document.querySelector("#image").click();
+}
+
+function loadchat(el) {
+    alert(el);
+    return false;
 }
