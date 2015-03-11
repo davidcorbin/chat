@@ -40,6 +40,10 @@ class html {
 	public function settings($content) {
 		$this->main($content);
 	}
+	
+	public function error($content) {
+		$this->main($content);
+	}
 
 	public function alertdanger($content) {
 		return '<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>' . $content . '</div>';
