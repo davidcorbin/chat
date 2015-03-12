@@ -36,6 +36,11 @@ $chat = $database->fetch("SELECT * FROM " . $chat ." ORDER BY date DESC LIMIT 50
 
 $me = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 
+// If no posts in chat
+if (count($chat)==0) {
+	echo "No posts yet. Be the first!";
+	exit();
+}
 
 // Create html 
 for ($i = 0; $i < count($chat); $i++) {
