@@ -29,8 +29,11 @@ if (!empty($_GET)) {
 
 // New chat message sent
 if (!empty($_POST) && isset($_POST['sendbutton'])) {
-print_r($_POST);
+
+	// Do query
 	$database->query("INSERT INTO `chat_" . $_POST['currentchat'] . "`(`data`, `user`, `date`) VALUES ('" . $database->escape($_POST['sendbutton']) . "','" . $_SESSION['un'] . "','" . time() . "')");
+	
+	// Increment user post count
 	$database->query("UPDATE logins SET `post_count` = post_count + 1 WHERE username = '" . $_SESSION['un'] . "'");
 	exit();
 }
@@ -39,8 +42,14 @@ print_r($_POST);
 if (!empty($_POST) && isset($_POST['newchat'])) {
 
 	// If no chat name 
-	if (!isset($_POST['chatnew']) || $_POST['chatnew']=="") {
+	if (!isset($_POST['newchat']) || $_POST['newchat']=="") {
 		echo "1";
+		exit();
+	}
+	
+	// Check that chat name has only letters and numbers
+	if (preg_match('/[^A-Za-z0-9]/', $_POST['newchat'])) {
+		echo "Invalid chars";
 		exit();
 	}
 
