@@ -47,7 +47,8 @@ function createchat() {
         data: chatpage,
         type: "post",
         success: function(data) {
-            alert(data);
+            //alert(data);
+            get();
         }
     });
     return false;
