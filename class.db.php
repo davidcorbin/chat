@@ -1,7 +1,7 @@
 <?php
 
 class db {
-	public $dbh;
+	public $dbh; // Database credentials
 	
 	public function __construct() {
 		require_once("dbconf.php");
