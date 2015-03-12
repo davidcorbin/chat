@@ -30,18 +30,35 @@ $info = '
         <div class="list-group">
             <a class="list-group-item active">Create or switch to:</a>
             <div class="list-group-item">
+<!--
                 <div class="input-group">
-                    <form onsubmit="return loadchat(this)">
+                    <form onsubmit="return loadchat(this)" >
                         <input name="newchat" type="text" class="form-control input-sm" value="chat" id="newchat" onkeypress="get()" onchange="get()" oninput="get()" />
                         <span class="input-group-btn">
                             <button class="btn btn-primary btn-sm" style="display:inline-block;">Go</button>
                         </span>
                     </form>
                 </div>
+//-->
+
+   <form role="form" onsubmit="return loadchat(this)">
+      <div class="row">
+         <div class="col-lg-6">
+            <div class="input-group">
+               <input type="text" value="chat" id="newchat"  name="newchat" class="form-control" onkeypress="get()" onchange="get()" oninput="get()">
+               <span class="input-group-addon" onclick="document.getElementById(\'newchat\').submit()">
+                  Go
+               </span>
+            </div>
+         </div>
+      </div>
+   </form>
+
             </div>
         </div>
     </div>
 </div>
+
 
 <script type="text/javascript">
 var page = "' . $page . '";
