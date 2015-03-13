@@ -47,7 +47,7 @@ if (!empty($_POST) && $_POST['userlocation']!="" && $_POST['userlocation']!=$use
 }
 
 // If new user website
-if (!empty($_POST) && $_POST['website']!="" && $_POST['website']!=$user[0]['website']) {
+if (!empty($_POST) && $_POST['website']!="" && $_POST['website']!="http://" && $_POST['website']!=$user[0]['website']) {
     // Remove all illegal characters from a url
     $url = filter_var($_POST['website'], FILTER_SANITIZE_URL);
 
