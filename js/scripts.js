@@ -47,7 +47,13 @@ function createchat() {
         data: chatpage,
         type: "post",
         success: function(data) {
-            //alert(data);
+            if (data == "1") {
+                chat_create_error("No chat name given");
+            }
+            if (data == "created") {
+                chat_create_success();
+            }
+
             get();
         }
     });
@@ -77,4 +83,23 @@ function clickcall() {
 function loadchat(el) {
     alert(el);
     return false;
+}
+
+function chat_create_error(error) {
+    $("#newchatfeedback").removeClass("has-success");
+    $("#newchatfeedback").removeClass("has-success");
+    $("#newchatfeedback").addClass("has-error");
+    $("#chatfeedback").html(error);
+}
+
+function chat_create_success() {
+$("#newchatfeedback").removeClass("has-success");
+    $("#newchatfeedback").removeClass("has-error");
+    $("#newchatfeedback").addClass("has-success");
+}
+
+function chat_create_default() {
+$("#newchatfeedback").removeClass("has-success");
+    $("#newchatfeedback").removeClass("has-success");
+    $("#newchatfeedback").removeClass("has-error");
 }
