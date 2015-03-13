@@ -1,9 +1,10 @@
 <?php
 
 class db {
-	public $dbh; // Database credentials
 	
-	public function __construct() {
+	private $dbh; // Database credentials
+	
+	function __construct() {
 		require_once("dbconf.php");
 		$this->dbh = mysqli_connect($mysql_host, $mysql_user, $mysql_pass) or die("Cannot connect, try again later!");
 		mysqli_select_db($this->dbh, $mysql_db) or die("Database doesn't exist");
