@@ -39,7 +39,7 @@ $user = '
     <div class="list-group">
         <a class="list-group-item active">' . $userdata[0]['username'] . '</a>
         <div class="list-group-item">
-            <img src="' . $avatar . '" class="img-circle" style="width:100px; margin: auto; display:block;">';
+            <img src="' . $avatar . '" class="img-circle" style="width:100px; height:100px; margin: auto; display:block;">';
 
 $user .= $userdata[0]['team_num']!="0"?'
         <br>
