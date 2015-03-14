@@ -103,3 +103,62 @@ $("#newchatfeedback").removeClass("has-success");
     $("#newchatfeedback").removeClass("has-success");
     $("#newchatfeedback").removeClass("has-error");
 }
+
+function changetheme(theme) {
+    var theme_url;
+
+    switch (theme) {
+        case "Cerulean": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/cerulean/bootstrap.min.css";
+            break;
+        case "Cosmo": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/cosmo/bootstrap.min.css";
+            break;
+        case "Cyborg": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/cyborg/bootstrap.min.css";
+            break;
+        case "Darkly": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/darkly/bootstrap.min.css";
+            break;
+        case "Flatly": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/flatly/bootstrap.min.css";
+            break;
+        case "Journal": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/journal/bootstrap.min.css";
+            break;
+        case "Lumen": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/lumen/bootstrap.min.css";
+            break;
+        case "Paper": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/paper/bootstrap.min.css";
+            break;
+        case "Readable": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/readable/bootstrap.min.css";
+            break;
+        case "Sandstone": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/sandstone/bootstrap.min.css";
+            break;
+        case "Simplex": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/simplex/bootstrap.min.css";
+            break;
+        case "Slate": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/slate/bootstrap.min.css";
+            break;
+        case "Spacelab": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/spacelab/bootstrap.min.css";
+            break;
+        case "Superhero": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/superhero/bootstrap.min.css";
+            break;
+        case "United": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/united/bootstrap.min.css";
+            break;
+        case "Yeti": 
+            theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/yeti/bootstrap.min.css";
+            break;
+        default: 
+            theme_url = "";
+    }
+
+    $("#theme").attr("href", theme_url);
+}
