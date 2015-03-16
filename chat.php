@@ -5,9 +5,6 @@ require("config.php");
 require_once('class.db.php');
 $database = new db;
 
-require_once('class.html.php');
-$html = new html;
-
 //Check for session vars
 if (!isset($_SESSION['un']) || !isset($_SESSION['pw'])) {
 	header("Location: login.php");
@@ -20,6 +17,13 @@ if (!isset($check)) {
 	header("Location: login.php");
 	die();
 }
+
+$theme = $database->fetch("SELECT theme FROM `logins` WHERE username = '" . $_SESSION['un'] . "'");
+$theme = $theme[0]['theme'];
+
+require_once('class.html.php');
+$html = new html($theme);
+unset($theme);
 
 $page = "";
 if (!empty($_GET)) {
