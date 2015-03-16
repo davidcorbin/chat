@@ -2,17 +2,29 @@
 
 require("config.php");
 
+require_once('class.db.php');
+$database = new db;
+
 // Check for session vars but don't validate
 if (!isset($_SESSION['un']) || !isset($_SESSION['pw'])) {
 	header("Location: chat.php");
 	die();
 }
 
-require_once('class.db.php');
-$database = new db;
+//Authorize session credentials
+$check = $database->auth($_SESSION["un"], $_SESSION["pw"]);
+if (!isset($check)) {
+	header("Location: login.php");
+	die();
+}
+
+$theme = $database->fetch("SELECT theme FROM `logins` WHERE username = '" . $_SESSION['un'] . "'");
+$theme = $theme[0]['theme'];
 
 require_once('class.html.php');
-$html = new html;
+$html = new html($theme);
+
+unset($theme);
 
 $user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 
@@ -46,6 +58,13 @@ if (!empty($_POST) && $_POST['userlocation']!="" && $_POST['userlocation']!=$use
 	$content .= $html->alertsuccess("Updated user location!");
 }
 
+// If user changed theme
+if (!empty($_POST) && $_POST['theme']!="" && strtolower($_POST['theme'])!=$user[0]['theme']) {
+	$database->query("UPDATE `logins` SET `theme`='" . strtolower($database->escape($_POST['theme'])) . "' WHERE username='" . $_SESSION['un'] . "'");
+	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
+	$content .= $html->alertsuccess("Changed theme!");
+}
+
 // If new user website
 if (!empty($_POST) && $_POST['website']!="" && $_POST['website']!="http://" && $_POST['website']!=$user[0]['website']) {
     // Remove all illegal characters from a url
@@ -75,6 +94,7 @@ $teamposition = $user[0]['position']==""?'placeholder="eg Build/Electrical"':'va
 
 $userlocation = $user[0]['location']==""?'placeholder="eg San Francisco, California"':'value="'.$user[0]['location'].'"';
 $userwebsite = $user[0]['website']==""?'value="http://"':'value="'.$user[0]['website'].'"';
+$theme=$user[0]['theme'];
 
 require_once("html/settings.inc");
 
