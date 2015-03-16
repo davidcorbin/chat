@@ -48,6 +48,33 @@ $content .= '
                             <input type="text" class="form-control" id="website" name="website" ' . $userwebsite . '>
                         </div>
                     </div>
+
+
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Theme</label>
+                        <div class="col-lg-10">
+                            <select name="theme" class="form-control" onchange="changetheme(this.value)">
+                                <option ' . ($theme=="default"?"selected='selected'":"") . '>Default</option>
+                                <option ' . ($theme=="cerulean"?"selected='selected'":"") . '>Cerulean</option>
+                                <option ' . ($theme=="cosmo"?"selected='selected'":"") . '>Cosmo</option>
+                                <option ' . ($theme=="cyborg"?"selected='selected'":"") . '>Cyborg</option>
+                                <option ' . ($theme=="darkly"?"selected='selected'":"") . '>Darkly</option>
+                                <option ' . ($theme=="flatly"?"selected='selected'":"") . '>Flatly</option>
+                                <option ' . ($theme=="journal"?"selected='selected'":"") . '>Journal</option>
+                                <option ' . ($theme=="lumen"?"selected='selected'":"") . '>Lumen</option>
+                                <option ' . ($theme=="paper"?"selected='selected'":"") . '>Paper</option>
+                                <option ' . ($theme=="readable"?"selected='selected'":"") . '>Readable</option>
+                                <option ' . ($theme=="sandstone"?"selected='selected'":"") . '>Sandstone</option>
+                                <option ' . ($theme=="simplex"?"selected='selected'":"") . '>Simplex</option>
+                                <option ' . ($theme=="slate"?"selected='selected'":"") . '>Slate</option>
+                                <option ' . ($theme=="spacelab"?"selected='selected'":"") . '>Spacelab</option>
+                                <option ' . ($theme=="superhero"?"selected='selected'":"") . '>Superhero</option>
+                                <option ' . ($theme=="united"?"selected='selected'":"") . '>United</option>
+                                <option ' . ($theme=="yeti"?"selected='selected'":"") . '>Yeti</option>
+                            </select>
+                        </div>
+                    </div>
+
                 
                     <div class="form-group">
                         <div class="col-lg-10">
