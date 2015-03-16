@@ -5,9 +5,6 @@ require_once("config.php");
 require_once('class.db.php');
 $database = new db;
 
-require_once('class.html.php');
-$html = new html;
-
 //Check for session vars
 if (!isset($_SESSION['un']) || !isset($_SESSION['pw'])) {
 	echo "Error in your session! Try refreshing.<script>window.location.replace(window.location.pathname);</script>";
