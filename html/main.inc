@@ -11,8 +11,8 @@ echo '
 <meta charset="utf-8">
 <title>FRC Chat</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-<link rel="stylesheet" href="'.$root.'/css/bootstrap.css" media="screen">
-<link rel="stylesheet" href="'.$root.'/css/bootswatch.min.css">
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+<link href="' . $theme_url . '" rel="stylesheet" id="theme">
 <link rel="stylesheet" href="'.$root.'/css/style.css">
 
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -65,7 +65,7 @@ body {padding-top:70px;}
 <div class="container" id="maincontainer">' . $content . '</div>
 
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="'.$root.'/js/bootstrap.min.js"></script>
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 <script src="'.$root.'/js/bootswatch.js"></script>
 <script src="'.$root.'/js/scripts.js"></script>
 ' . "
