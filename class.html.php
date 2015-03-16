@@ -102,7 +102,7 @@ class html {
 			case "spacelab": 
 				$theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/spacelab/bootstrap.min.css";
 				break;
-			case "suberhero": 
+			case "superhero": 
 				$theme_url = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.2/superhero/bootstrap.min.css";
 				break;
 			case "united": 
