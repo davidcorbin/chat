@@ -18,6 +18,18 @@ if (!isset($check)) {
 	die();
 }
 
+// Fetch user data 
+$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
+
+// Set empty var for html
+$content = "";
+
+// If user changed theme
+if (!empty($_POST) && $_POST['theme']!="" && strtolower($_POST['theme'])!=$user[0]['theme']) {
+	$database->query("UPDATE `logins` SET `theme`='" . strtolower($database->escape($_POST['theme'])) . "' WHERE username='" . $_SESSION['un'] . "'");
+	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
+}
+
 $theme = $database->fetch("SELECT theme FROM `logins` WHERE username = '" . $_SESSION['un'] . "'");
 $theme = $theme[0]['theme'];
 
@@ -25,10 +37,6 @@ require_once('class.html.php');
 $html = new html($theme);
 
 unset($theme);
-
-$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
-
-$content = "";
 
 // If new link for user image
 if (!empty($_POST) && $_POST['link']!="") {
@@ -56,13 +64,6 @@ if (!empty($_POST) && $_POST['userlocation']!="" && $_POST['userlocation']!=$use
 	$database->query("UPDATE `logins` SET `location`='" . $database->escape($_POST['userlocation']) . "' WHERE username='" . $_SESSION['un'] . "'");
 	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
 	$content .= $html->alertsuccess("Updated user location!");
-}
-
-// If user changed theme
-if (!empty($_POST) && $_POST['theme']!="" && strtolower($_POST['theme'])!=$user[0]['theme']) {
-	$database->query("UPDATE `logins` SET `theme`='" . strtolower($database->escape($_POST['theme'])) . "' WHERE username='" . $_SESSION['un'] . "'");
-	$user = $database->fetch("SELECT * FROM `logins` WHERE username='" . $_SESSION['un'] . "'");
-	$content .= $html->alertsuccess("Changed theme!");
 }
 
 // If new user website
