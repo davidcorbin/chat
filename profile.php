@@ -5,8 +5,18 @@ require("config.php");
 require_once('class.db.php');
 $database = new db;
 
-require_once('class.html.php');
-$html = new html;
+if (isset($_SESSION['un']) {
+	$theme = $database->fetch("SELECT theme FROM `logins` WHERE username = '" . $_SESSION['un'] . "'");
+	$theme = $theme[0]['theme'];
+
+	require_once('class.html.php');
+	$html = new html($theme);
+	unset($theme);
+}
+else {
+	require_once('class.html.php');
+	$html = new html;
+}
 
 // Get first GET key and escape
 $user = $database->escape(key($_GET));
