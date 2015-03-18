@@ -5,7 +5,7 @@ require("config.php");
 require_once('class.db.php');
 $database = new db;
 
-if (isset($_SESSION['un']) {
+if (isset($_SESSION['un'])) {
 	$theme = $database->fetch("SELECT theme FROM `logins` WHERE username = '" . $_SESSION['un'] . "'");
 	$theme = $theme[0]['theme'];
 
