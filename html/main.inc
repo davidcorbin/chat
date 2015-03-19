@@ -39,7 +39,7 @@ echo isset($_SESSION["un"])?'
 ':"";
 
 echo '
-            <a href="'.$root.'/chat.php" class="navbar-brand">FRC Chat <span style="color: red; font-size:small;">BETA</span></a>
+            <a href="'.$root.'/chat.php" class="navbar-brand">FRC Chat <span style="font-size:small; color:red;">BETA</span></a>
         </div>
 ';
 
