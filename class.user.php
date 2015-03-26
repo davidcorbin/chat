@@ -1,11 +1,24 @@
 <?php
 
-require("class.db.php");
+require_once("class.db.php");
 
 class user extends db {
 	function __construct($username) {
 		$this->username = $username;
-		db::__construct();
+		parent::__construct();
+		if (!$this->userexists($username)) {
+			$error = array();
+			$error['error_code'] = "1";
+			echo json_encode($error);
+			exit();
+		}
+	}
+	
+	private function userexists($username) {
+		if ($this->rows("SELECT * FROM logins WHERE username='$username'") == 0) {
+			return FALSE;
+		}
+		return TRUE;
 	}
 	
 	public function getUsername() {
