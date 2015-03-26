@@ -5,7 +5,8 @@ class db {
 	private $dbh; // Database credentials
 	
 	function __construct() {
-		require_once("dbconf.php");
+		// Required (not _once) because variables loose scope outside of constructor, but PHP still thinks it was included (needed for extended classes)
+		require("dbconf.php");
 		$this->dbh = mysqli_connect($mysql_host, $mysql_user, $mysql_pass) or die("Cannot connect, try again later!");
 		mysqli_select_db($this->dbh, $mysql_db) or die("Database doesn't exist");
 		if (!$this->dbh->set_charset("utf8")) {
