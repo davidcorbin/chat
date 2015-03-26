@@ -8,6 +8,11 @@
     height:40px;
 }
 
+.avatar-lg {
+    width:80px;
+    height:80px;
+}
+
 .chat 
 {
     list-style: none;
