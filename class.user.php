@@ -7,10 +7,7 @@ class user extends db {
 		$this->username = $username;
 		parent::__construct();
 		if (!$this->userexists($username)) {
-			$error = array();
-			$error['error_code'] = "1";
-			echo json_encode($error);
-			exit();
+			throw new Exception("User not found");
 		}
 	}
 	
