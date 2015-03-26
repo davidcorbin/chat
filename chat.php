@@ -71,6 +71,7 @@ if (!empty($_POST) && isset($_POST['newchat'])) {
 }
 
 else {
+	$page="#".$page;
 	require("html/chat.inc");
 	$html->chat($info);
 }
