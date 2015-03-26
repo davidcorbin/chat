@@ -31,7 +31,7 @@ var get = function() {
                 $(".chat").html("<p>This chat doesn't exist. Would you like to create it?</p><button class='btn btn-default' onclick='createchat()'>Yes</button>");
             }
             else {
-                $("#chattitle").text(chatpage);
+                $("#chattitle").text("#"+chatpage);
                 $(".chat").html(data); 
                 document.getElementById("currentchat").value = chatpage;
             }
