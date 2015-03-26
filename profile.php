@@ -5,28 +5,24 @@ require("config.php");
 require_once('class.db.php');
 $database = new db;
 
-/*
-if (isset($_SESSION['un'])) {
-	$theme = $database->fetch("SELECT theme FROM `logins` WHERE username = '" . $_SESSION['un'] . "'");
-	$theme = $theme[0]['theme'];
-
-	require_once('class.html.php');
-	$html = new html($theme);
-	unset($theme);
-}
-else {
-	require_once('class.html.php');
-	$html = new html;
-}
-*/
-
 // Get first GET key and escape
 $username = $database->escape(key($_GET));
 
 require_once("class.user.php");
-$user = new user($username);
 
-// Add profile view
+try {
+    $user = new user($username);
+}
+catch (Exception $e) {
+    if ($e->getMessage() == "User not found") {
+        $error = array();
+        $error['error'] = $e->getMessage();
+        echo json_encode($error);
+        exit();
+    }
+}
+
+// Add profile view if not looking at my profile
 if (!isset($_SESSION['un']) || $_SESSION['un']!=$username) {
     $database->query("UPDATE logins SET `profile_view_count` = profile_view_count + 1 WHERE username = '" . $username . "'");
 }
@@ -53,4 +49,3 @@ $values['posts'] = $user->getPostCount();
 $content = json_encode($values);
 
 echo $content;
-
