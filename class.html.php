@@ -40,8 +40,8 @@ class html {
 		$this->main($user);
 	}
 		
-	public function adduser($error) {
-		include("html/adduser.inc");
+	public function signup($error) {
+		include("html/signup.inc");
 		$this->main($error . $form);
 	}
 	

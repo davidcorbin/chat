@@ -5,7 +5,7 @@ $form = '
 <div class="row">
     <div class="col-lg-6 col-centered">
         <div class="well">
-            <form class="form-horizontal" method="post" action="adduser" autocomplete="off">
+            <form class="form-horizontal" method="post" action="signup" autocomplete="off">
                 <fieldset>
                     <legend>Add User or <a href="login.php">Login</a></legend>
                     <div class="form-group">

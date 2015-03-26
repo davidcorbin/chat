@@ -3,21 +3,11 @@
 $form = '
 
 <div class="row">
-<!--
-    <div class="col-md-6 col-lg-6">
-        <div class="well">
-            <h2></h2>
-            <p>Now fully supporting mobile and tablet devices.</p>
-            <a class="btn btn-primary btn-lg" href="adduser">Signup</a>
-        </div>
-    </div>
-    //-->
-
     <div class="col-md-6 col-lg-6">
         <div class="jumbotron">
             <h1>Welcome to FRC Chat</h1>
             <p>Now fully supporting mobile and tablet devices.</p>
-            <p><a class="btn btn-primary btn-lg" href="adduser">Signup</a></p>
+            <p><a class="btn btn-primary btn-lg" href="signup">Signup</a></p>
         </div>
     </div>
 

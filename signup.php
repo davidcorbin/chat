@@ -24,23 +24,23 @@ if (!empty($_POST)) {
 
 	// If both forms aren't filled in
 	if ($_POST['username'] == "" || $_POST['password'] == "" || $_POST['email'] == "") {
-		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please include username, email, and password.'));
+		$html->signup($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please include username, email, and password.'));
 		return false;
 	}
 	
 	// If that username is already taken in the database
 	if ($username_rows == 1) {
-		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That USERNAME is already taken. Please choose another one.'));
+		$html->signup($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That USERNAME is already taken. Please choose another one.'));
 	}
 
 	// If that email is already taken in the database
 	if ($email_rows == 1) {
-		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That EMAIL is already taken. Please choose another one.'));
+		$html->signup($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; That EMAIL is already taken. Please choose another one.'));
 	}
 	
 	// Validate email
 	if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
-		$html->adduser($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please use a valid email!'));
+		$html->signup($html->alertdanger('<span class="glyphicon glyphicon-floppy-remove"></span>&nbsp;&nbsp; Please use a valid email!'));
 	}
 	
 	// Do the database query
@@ -52,5 +52,5 @@ if (!empty($_POST)) {
 }
 
 else {
-	$html->adduser("");
+	$html->signup("");
 }
