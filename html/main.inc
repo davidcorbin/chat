@@ -9,7 +9,7 @@ echo '
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>FRC Chat | ' . $title . '</title>
+<title>First Connect | ' . $title . '</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
 <link href="' . $theme_url . '" rel="stylesheet" id="theme">
@@ -40,7 +40,7 @@ echo isset($_SESSION["un"])?'
 ':"";
 
 echo '
-            <a href="'.$root.'/chat.php" class="navbar-brand">FRC Chat <span style="font-size:small; color:red;">BETA</span></a>
+            <a href="'.$root.'/chat.php" class="navbar-brand">First Connect <span style="font-size:small; color:red;">BETA</span></a>
         </div>
 ';
 

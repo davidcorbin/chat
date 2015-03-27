@@ -1,4 +1,4 @@
-FRC Chat
+First Connect
 ========
 
 Web chat client for FRC teams

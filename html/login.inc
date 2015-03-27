@@ -5,7 +5,8 @@ $form = '
 <div class="row">
     <div class="col-md-6 col-lg-6">
         <div class="jumbotron">
-            <h1>Welcome to FRC Chat</h1>
+            <h1>Welcome to 
+First Connect</h1>
             <p>Now fully supporting mobile and tablet devices.</p>
             <p><a class="btn btn-primary btn-lg" href="signup">Signup</a></p>
         </div>
