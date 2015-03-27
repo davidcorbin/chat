@@ -9,7 +9,7 @@ class html {
 	}
 
 	// Default HTML template for content
-	private function main($content) {
+	private function main($content, $title) {
 		$theme_url = $this->theme($this->theme);
 		include("html/main.inc");
 		exit();
@@ -19,40 +19,32 @@ class html {
 		include("html/login.inc");
 		
 		if ($options == 'incorrect') {
-			$this->main($this->alertdanger('Incorrect username and/or password!') . $form);
+			$this->main($this->alertdanger('Incorrect username and/or password!') . $form, "Login");
 		}
 		
 		elseif ($options == 'newuser') {
-			$this->main($this->alertsuccess('User successfully created! Now login!') . $form);
+			$this->main($this->alertsuccess('User successfully created! Now login!') . $form, "Login");
 		}
 		
 		else {
-			$this->main($form);
+			$this->main($form, "Login");
 		}
 	}
 	
 	
 	public function chat($info) {	
-		$this->main($info);
-	}
-	
-	public function profile($user) {
-		$this->main($user);
+		$this->main($info, "Chat");
 	}
 		
 	public function signup($error) {
 		include("html/signup.inc");
-		$this->main($error . $form);
+		$this->main($error . $form, "Signup");
 	}
 	
 	public function settings($content) {
-		$this->main($content);
+		$this->main($content, "Settings");
 	}
 	
-	public function error($content) {
-		$this->main($content);
-	}
-
 	public function alertdanger($content) {
 		return '<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>' . $content . '</div>';
 	}
