@@ -29,6 +29,7 @@ echo '
         <div class="navbar-header">
 ';
 
+// If logged in, show navbar links
 echo isset($_SESSION["un"])?'
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-toggle">
                 <span class="sr-only">Toggle navigation</span>
@@ -46,7 +47,6 @@ echo '
 echo isset($_SESSION["un"])?'
         <div class="collapse navbar-collapse" id="navbar-toggle">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="'.$root.'/profile?'.$_SESSION['un'].'">'.$_SESSION['un'].'</a></li>
                 <li><a href="'.$root.'/chat">Chat</a></li>
                 <li><a href="'.$root.'/settings">Settings</a></li>
                 <li><a href="'.$root.'/login">Logout</a></li>
