@@ -7,25 +7,65 @@ $database = new db;
 
 //Check for session vars
 if (!isset($_SESSION['un']) || !isset($_SESSION['pw'])) {
-	echo "Error in your session! Try refreshing.<script>window.location.replace(window.location.pathname);</script>";
+	echo "Error in your session! Try refreshing";
 	die();
 }
 
 //Authorize session credentials
 $check = $database->auth($_SESSION["un"], $_SESSION["pw"]);
 if (!isset($check)) {
-	echo "Error in your session! Try refreshing.<script>window.location.replace(window.location.pathname);</script>";
+	echo "Error in your session! Try refreshing";
 	die();
 }
 
-$chat = key($_GET);
-$chat = "chat_".$chat;
+$chatname = "chat_".$_GET['chatpage'];
 
+if ($chatname == "chat_") {
+    echo "no";
+    exit();
+}
+/*
 // Exit if table doesn't exist
 if (!$database->tableexists($chat)) {
-	echo "No";
+	echo "create";
 	exit();
 }
+*/
+
+require_once("class.user.php");
+
+require_once("class.chat.php");
+$chat = new chat($chatname);
+$chat->getPostsAfterId($_GET['latestpost'], 50);
+$resultjson = $chat->getJson();
+$decoded = json_decode($resultjson, true);
+
+// Parse each post in array
+for ($i = 0; $i < count($decoded); $i++) {
+
+	// Change date from UTC int to "x days ago"
+	$decoded[$i]["date"] = timeconvert($decoded[$i]["date"]);
+
+	// Create user object from username attached to each post
+	$user = new user($decoded[$i]["user"]);
+	// Set user profile image from user object
+	$decoded[$i]["avatar"] = $user->getAvatar();
+    // If user is me
+    if ($decoded[$i]["avatar"]=="" && $_SESSION["un"]==$user->getUsername()) {
+        $decoded[$i]["avatar"] = "http://placehold.it/50/FA6F57/fff&text=ME";
+    }
+    else if ($decoded[$i]["avatar"]=="" && $_SESSION["un"]!=$user->getUsername()) {
+        $decoded[$i]["avatar"] = "http://placehold.it/50/55C1E7/fff&text=U";
+    }
+}
+
+print_r(json_encode($decoded));
+exit();
+
+
+
+
+
 
 
 // Fetch database values for latest comments and user data

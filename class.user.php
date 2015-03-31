@@ -3,6 +3,9 @@
 require_once("class.db.php");
 
 class user extends db {
+
+    private $username;
+
 	function __construct($username) {
 		$this->username = $username;
 		parent::__construct();

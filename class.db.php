@@ -21,12 +21,19 @@ class db {
 
 	// MYSQL Query database
 	public function query($sql) {
-		return mysqli_query($this->dbh, $sql) or die("Query Error: " . mysqli_errno($this->dbh) . ": " . mysqli_error($this->dbh));
+        return mysqli_query($this->dbh, $sql);
+		//return mysqli_query($this->dbh, $sql) or die("Query Error: " . mysqli_errno($this->dbh) . ": " . mysqli_error($this->dbh));
 	}
 	
 	// MYSQL Fetch from database
 	public function fetch($sql){
-		$query = mysqli_query($this->dbh, $sql);
+		//$query = mysqli_query($this->dbh, $sql);
+		$query = $this->query($sql);
+		//var_dump($query);
+		if($query === FALSE) { 
+            die(mysqli_error($this->dbh));
+        }
+
 		$result = array();
 		while ($record = mysqli_fetch_array($query, MYSQL_ASSOC)) {
 			$result[] = $record;

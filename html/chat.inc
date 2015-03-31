@@ -87,7 +87,7 @@ $info = '
 </style>
 
 <script type="text/javascript">
-setInterval(function(){get();},3000);
+setInterval(function(){get();},5000);
 
 window.onload = function(){
   $("#profileView").on("show.bs.modal", function (event) {

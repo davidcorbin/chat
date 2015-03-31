@@ -1,3 +1,6 @@
+var numofposts = 0;
+var latestpost = -1;
+
 var send = function(formEl) {
     if (document.getElementById("sendbutton").value == "") {
         return false;
@@ -22,17 +25,76 @@ var get = function() {
     var chatpage = document.getElementById("newchat").value;
     $.ajax({
         url: "chatupdate",
-        data: chatpage,
+        data: { "chatpage":chatpage, "latestpost": latestpost },
         type: "get",
         cache: "false",
         success: function(data) {
-            if (data=="No") {
+            if (data=="create") {
                 $("#chattitle").text("Chat not found");
                 $(".chat").html("<p>This chat doesn't exist. Would you like to create it?</p><button class='btn btn-default' onclick='createchat()'>Yes</button>");
             }
+            else if (data=="no") {
+                $("#chattitle").text("Chat can't be created");
+                $(".chat").html("<p>This chat can't be created.</p>");
+            }
             else {
                 $("#chattitle").text("#"+chatpage);
-                $(".chat").html(data); 
+                //$(".chat").html(data);
+
+var resultjson = JSON.parse(data);
+for (var i = 0; i < resultjson.length; i++) {
+
+    $("<li></li>", {
+        "class": "right clearfix " + numofposts
+    }).appendTo(".chat");
+
+    $("<span></span>", {
+        "class": "chat-img pull-right"
+    }).appendTo("." + numofposts.toString());
+
+    $("<a></a>", {
+        'data-toggle':"modal",
+        'data-target':"#profileView",
+        'data-user':resultjson[i].user
+    }).appendTo("." + numofposts.toString() + " span");
+
+    $("<img />", {
+        'src':resultjson[i].avatar,
+        "alt":"Profile Image",
+        "class":"img-circle avatar"
+    }).appendTo("." + numofposts.toString() + " span a");
+
+    $("<div class='chat-body clearfix'><div class='header'>").appendTo("." + numofposts.toString());
+
+    $("<strong>" + resultjson[i].user + "</strong>", {
+        "class":'primary-font'
+    }).appendTo("." + numofposts.toString() + " div.chat-body div.header");
+
+    $('<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' + resultjson[i].date + '</small></div>').appendTo("." + numofposts.toString() + " div.chat-body div.header");
+
+    $('<p>' + resultjson[i].data + '</p></div></li>').appendTo("." + numofposts.toString() + " div.chat-body div.header");
+
+    if (parseInt(resultjson[i].id) > latestpost) {
+        latestpost = parseInt(resultjson[i].id);
+    }
+
+    numofposts++;
+
+}
+
+/*
+
+<li class="right clearfix"><span class="chat-img pull-right"><a data-toggle="modal" data-target="#profileView" data-user="' . $chat[$i]['user'] . '"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></a></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
+
+		echo $me[0]['type']=="admin"?'<span class="glyphicon glyphicon-flash" style="color:black;"></span>':'';
+		echo $chat[$i]['user'];
+		echo '</strong><small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>';
+		echo timeconvert($chat[$i]['date']);
+		echo '</small></div><p>';
+		echo htmlspecialchars($chat[$i]['data']);
+		echo '</p></div></li>
+		
+*/
                 document.getElementById("currentchat").value = chatpage;
             }
         }
