@@ -46,7 +46,7 @@ for (var i = 0; i < resultjson.length; i++) {
 
     $("<li></li>", {
         "class": "right clearfix " + numofposts
-    }).appendTo(".chat");
+    }).prependTo(".chat");
 
     $("<span></span>", {
         "class": "chat-img pull-right"
@@ -81,20 +81,6 @@ for (var i = 0; i < resultjson.length; i++) {
     numofposts++;
 
 }
-
-/*
-
-<li class="right clearfix"><span class="chat-img pull-right"><a data-toggle="modal" data-target="#profileView" data-user="' . $chat[$i]['user'] . '"><img src="' . $avatar . '" alt="User Avatar" class="img-circle avatar" /></a></span><div class="chat-body clearfix"><div class="header"><strong class="primary-font">';
-
-		echo $me[0]['type']=="admin"?'<span class="glyphicon glyphicon-flash" style="color:black;"></span>':'';
-		echo $chat[$i]['user'];
-		echo '</strong><small class="pull-right text-muted"> <span class="glyphicon glyphicon-time"></span>';
-		echo timeconvert($chat[$i]['date']);
-		echo '</small></div><p>';
-		echo htmlspecialchars($chat[$i]['data']);
-		echo '</p></div></li>
-		
-*/
                 document.getElementById("currentchat").value = chatpage;
             }
         }
@@ -223,4 +209,44 @@ function changetheme(theme) {
     }
 
     $("#theme").attr("href", theme_url);
+}
+
+function loadProfile(event) {
+    var button = $(event.relatedTarget);
+    var recipient = button.data("user");
+    var modal = $(".modal");
+
+    $.get( "profile/"+recipient, function( data ) {
+//alert(data);
+        var p = document.querySelectorAll(".modal-body p"), i;
+        for (i = 0; i < p.length; ++i) {
+            p[i].style.display = "block";
+        }
+        var profile = JSON.parse(data);
+        document.querySelector("#profileav").src = profile.avat;
+        if (profile.team == "0") {
+            document.querySelector("#profileteamwrap").style.display = "none";    
+        }
+        if (profile.pos == "") {
+            document.querySelector("#profileposwrap").style.display = "none";    
+        }
+        if (profile.loc == "") {
+            document.querySelector("#profilelocwrap").style.display = "none";    
+        }
+        if (profile.site == "") {
+            document.querySelector("#profilesitewrap").style.display = "none";    
+        }
+        document.querySelector("#profileteam").textContent = profile.team;
+        document.querySelector("#profilepos").textContent = profile.pos;
+        document.querySelector("#profileloc").textContent = profile.loc;
+        document.querySelector("#profilesite").textContent = profile.site;
+        document.querySelector("#profilesite").href = profile.site;
+        document.querySelector("#profilecreatedat").textContent = profile.createat;
+        document.querySelector("#profileviews").textContent = profile.views;
+        document.querySelector("#profileposts").textContent = profile.posts;
+
+
+    });
+
+    modal.find(".modal-title").text(recipient);
 }

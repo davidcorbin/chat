@@ -87,7 +87,7 @@ $info = '
 </style>
 
 <script type="text/javascript">
-setInterval(function(){get();},5000);
+//setInterval(function(){get();},5000);
 
 window.onload = function(){
   $("#profileView").on("show.bs.modal", function (event) {
@@ -96,45 +96,7 @@ window.onload = function(){
   get();
 }
 
-function loadProfile(event) {
-    var button = $(event.relatedTarget);
-    var recipient = button.data("user");
-    var modal = $(".modal");
 
-    $.get( "profile/"+recipient, function( data ) {
-//alert(data);
-        var p = document.querySelectorAll(".modal-body p"), i;
-        for (i = 0; i < p.length; ++i) {
-            p[i].style.display = "block";
-        }
-        var profile = JSON.parse(data);
-        document.querySelector("#profileav").src = profile.avat;
-        if (profile.team == "0") {
-            document.querySelector("#profileteamwrap").style.display = "none";    
-        }
-        if (profile.pos == "") {
-            document.querySelector("#profileposwrap").style.display = "none";    
-        }
-        if (profile.loc == "") {
-            document.querySelector("#profilelocwrap").style.display = "none";    
-        }
-        if (profile.site == "") {
-            document.querySelector("#profilesitewrap").style.display = "none";    
-        }
-        document.querySelector("#profileteam").textContent = profile.team;
-        document.querySelector("#profilepos").textContent = profile.pos;
-        document.querySelector("#profileloc").textContent = profile.loc;
-        document.querySelector("#profilesite").textContent = profile.site;
-        document.querySelector("#profilesite").href = profile.site;
-        document.querySelector("#profilecreatedat").textContent = profile.createat;
-        document.querySelector("#profileviews").textContent = profile.views;
-        document.querySelector("#profileposts").textContent = profile.posts;
-
-
-    });
-
-    modal.find(".modal-title").text(recipient);
-}
 </script>
     
 '; 
