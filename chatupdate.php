@@ -24,18 +24,23 @@ if ($chatname == "chat_") {
     echo "no";
     exit();
 }
-/*
-// Exit if table doesn't exist
-if (!$database->tableexists($chat)) {
-	echo "create";
-	exit();
-}
-*/
 
 require_once("class.user.php");
 
 require_once("class.chat.php");
-$chat = new chat($chatname);
+
+// Try to create chat object
+try {
+    $chat = new chat($chatname);
+}
+catch (Exception $e) {
+    // If table doesn't exist
+    if ($e->getMessage() == "Table not found") {
+        echo "create";
+        exit();
+    }
+}
+
 $chat->getPostsAfterId($_GET['latestpost'], 50);
 $resultjson = $chat->getJson();
 $decoded = json_decode($resultjson, true);
@@ -43,20 +48,40 @@ $decoded = json_decode($resultjson, true);
 // Parse each post in array
 for ($i = 0; $i < count($decoded); $i++) {
 
+    // Create json parameter to tell if the post is from the logged in user
+    if ($decoded[$i]["user"] == $_SESSION["un"]) {
+        $decoded[$i]["me"] = TRUE;
+    }
+    else {
+        $decoded[$i]["me"] = FALSE;
+    }
+
 	// Change date from UTC int to "x days ago"
 	$decoded[$i]["date"] = timeconvert($decoded[$i]["date"]);
+	
+	// Try to create user object from username 
+	try {
+		$user = new user($decoded[$i]["user"]);
+	}
+	catch (Exception $e) {
+		
+		// If user is not in database
+		if ($e->getMessage() == "User not found") {
+			$decoded[$i]["avatar"] = "/chat/images/NotFound-web.png";
+			$decoded[$i]["user"] = $decoded[$i]["user"] . "(deleted)"; 
+		}
+		continue;
+	}
 
-	// Create user object from username attached to each post
-	$user = new user($decoded[$i]["user"]);
 	// Set user profile image from user object
 	$decoded[$i]["avatar"] = $user->getAvatar();
-    // If user is me
-    if ($decoded[$i]["avatar"]=="" && $_SESSION["un"]==$user->getUsername()) {
-        $decoded[$i]["avatar"] = "http://placehold.it/50/FA6F57/fff&text=ME";
-    }
-    else if ($decoded[$i]["avatar"]=="" && $_SESSION["un"]!=$user->getUsername()) {
-        $decoded[$i]["avatar"] = "http://placehold.it/50/55C1E7/fff&text=U";
-    }
+	// If user is me
+	if ($decoded[$i]["avatar"]=="" && $_SESSION["un"]==$user->getUsername()) {
+		$decoded[$i]["avatar"] = "images/ME-web.png";
+	}
+	else if ($decoded[$i]["avatar"]=="" && $_SESSION["un"]!=$user->getUsername()) {
+		$decoded[$i]["avatar"] = "images/U-web.png";
+	}
 }
 
 print_r(json_encode($decoded));
