@@ -11,28 +11,28 @@ $username = $database->escape(key($_GET));
 require_once("class.user.php");
 
 try {
-    $user = new user($username);
+	$user = new user($username);
 }
 catch (Exception $e) {
-    if ($e->getMessage() == "User not found") {
-        $error = array();
-        $error['error'] = $e->getMessage();
-        echo json_encode($error);
-        exit();
-    }
+	if ($e->getMessage() == "User not found") {
+		$error = array();
+		$error['error'] = $e->getMessage();
+		echo json_encode($error);
+		exit();
+	}
 }
 
 // Add profile view if not looking at my profile
 if (!isset($_SESSION['un']) || $_SESSION['un']!=$username) {
-    $database->query("UPDATE logins SET `profile_view_count` = profile_view_count + 1 WHERE username = '" . $username . "'");
+	$database->query("UPDATE logins SET `profile_view_count` = profile_view_count + 1 WHERE username = '" . $username . "'");
 }
 
 // If logged in and looking at my profile
 if (isset($_SESSION['un']) && $_SESSION['un']==$username) {
-    $avatar = $user->getAvatar()!=""?$user->getAvatar():"http://placehold.it/50/FA6F57/fff&text=ME";
+	$avatar = $user->getAvatar()!=""?$user->getAvatar():"images/ME-web.png";
 }
 else {
-    $avatar = $user->getAvatar()!=""?$user->getAvatar():"http://placehold.it/50/55C1E7/fff&text=U";
+	$avatar = $user->getAvatar()!=""?$user->getAvatar():"images/U-web.png";
 }
 
 $values = array();
