@@ -40,7 +40,7 @@ echo isset($_SESSION["un"])?'
 ':"";
 
 echo '
-            <a href="'.$root.'/chat.php" class="navbar-brand">First Connect <span style="font-size:small; color:red;">BETA</span></a>
+            <a href="'.$root.'/chat" class="navbar-brand">First Connect <span style="font-size:small; color:red;">BETA</span></a>
         </div>
 ';
 
