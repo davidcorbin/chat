@@ -7,9 +7,9 @@ header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 
-$lifetime=86400; //24 hours
-session_start(); //Start session
-setcookie(session_name(), session_id(), time() + $lifetime); //CORRECT  SESSION TIMING! The session will always reset the timing every time the page is refreshed or changes. 
+$lifetime=86400; // 24 hours
+session_start(); // Start session
+setcookie(session_name(), session_id(), time() + $lifetime); // CORRECT  SESSION TIMING! The session will always reset the timing every time the page is refreshed or changes. 
 
 $debug = true;
 if ($debug) {
@@ -22,7 +22,7 @@ if ($debug) {
 function timeconvert($utc) {
 	$etime = time() - $utc;
 	if ($etime < 1) {
-		return '0 seconds';
+		return 'Just now';
 	}
 	$a = array(12 * 30 * 24 * 60 * 60 => 'year',
 			30 * 24 * 60 * 60 => 'month',
