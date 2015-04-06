@@ -80,23 +80,6 @@ $info = '
   </div>
 </div>
 
-<style>
-.modal-body p {
-    text-align:center;
-}
-</style>
-
-<script type="text/javascript">
-//setInterval(function(){get();},5000);
-
-window.onload = function(){
-  $("#profileView").on("show.bs.modal", function (event) {
-    loadProfile(event);
-  });
-  get();
-}
-
-
-</script>
+<script type="text/javascript" src="js/chat.js"></script>
     
 '; 
