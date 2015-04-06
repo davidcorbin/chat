@@ -9,6 +9,9 @@ class chat extends db {
     function __construct($chat) {
         $this->chat = $chat;
         parent::__construct();
+	if (!$this->tableexists($chat)) {
+		throw new Exception("Table not found");
+	}
     }
 
     public function getPosts($numofposts) {
@@ -17,7 +20,7 @@ class chat extends db {
     }
 
     public function getPostsAfterId($id, $numofposts) {
-        $this->fetched_data = $this->fetch("SELECT * FROM $this->chat WHERE id > $id ORDER BY date DESC LIMIT $numofposts");
+        $this->fetched_data = $this->fetch("SELECT * FROM $this->chat WHERE id > $id ORDER BY date ASC LIMIT $numofposts");
     }
 
     public function getJson() {
