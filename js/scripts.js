@@ -1,7 +1,14 @@
+// Global number of posts in chat
 var numofposts = 0;
+
+// Database id of latest post
 var latestpost = -1;
 
-var send = function(formEl) {
+// Previous get() chat name
+var prevchatname = "";
+
+// Function for sending a chat message
+function send(formEl) {
     if (document.getElementById("sendbutton").value == "") {
         return false;
     }
@@ -21,66 +28,108 @@ var send = function(formEl) {
     return false;
 }
 
-var get = function() {
+// Function for getting chat json from database
+function get() {
     var chatpage = document.getElementById("newchat").value;
+
+    // Update URL hash
+    window.location.replace(window.location.href.split('#')[0] + '#' + chatpage);
+
+    // If previous chat name hasn't been set (get hasn't been called)
+    if (prevchatname == "") {
+        prevchatname = chatpage;
+    }
+    // User changed chat; clear chat box and reset post count
+    else if (prevchatname != chatpage) {
+        $(".chat").html("");
+        latestpost = -1;
+        numofposts = 0;
+        prevchatname = chatpage;
+    }
+
     $.ajax({
         url: "chatupdate",
-        data: { "chatpage":chatpage, "latestpost": latestpost },
+        data: { "chatpage": chatpage, "latestpost": latestpost },
         type: "get",
         cache: "false",
         success: function(data) {
+
+            // If chat doesn't exist and can be created
             if (data=="create") {
                 $("#chattitle").text("Chat not found");
                 $(".chat").html("<p>This chat doesn't exist. Would you like to create it?</p><button class='btn btn-default' onclick='createchat()'>Yes</button>");
             }
+
+            // If chat can't be created for whatever reason
             else if (data=="no") {
                 $("#chattitle").text("Chat can't be created");
                 $(".chat").html("<p>This chat can't be created.</p>");
             }
+
+            // Continue to parse json
             else {
+                // Change chat title
                 $("#chattitle").text("#"+chatpage);
-                //$(".chat").html(data);
 
-var resultjson = JSON.parse(data);
-for (var i = 0; i < resultjson.length; i++) {
+                var resultjson = JSON.parse(data);
 
-    $("<li></li>", {
-        "class": "right clearfix " + numofposts
-    }).prependTo(".chat");
+                // Loop through all returned posts
+                for (var i = 0; i < resultjson.length; i++) {
 
-    $("<span></span>", {
-        "class": "chat-img pull-right"
-    }).appendTo("." + numofposts.toString());
+                    // If post is from me
+                    if (resultjson[i].me == true) {
 
-    $("<a></a>", {
-        'data-toggle':"modal",
-        'data-target':"#profileView",
-        'data-user':resultjson[i].user
-    }).appendTo("." + numofposts.toString() + " span");
+                        $("<li></li>", {
+                            "class": "right clearfix " + numofposts
+                        }).prependTo(".chat");
 
-    $("<img />", {
-        'src':resultjson[i].avatar,
-        "alt":"Profile Image",
-        "class":"img-circle avatar"
-    }).appendTo("." + numofposts.toString() + " span a");
+                        $("<span></span>", {
+                            "class": "chat-img pull-right"
+                        }).appendTo("." + numofposts.toString());
 
-    $("<div class='chat-body clearfix'><div class='header'>").appendTo("." + numofposts.toString());
+                    }
+                    // Post is from someone other than me
+                    else {
 
-    $("<strong>" + resultjson[i].user + "</strong>", {
-        "class":'primary-font'
-    }).appendTo("." + numofposts.toString() + " div.chat-body div.header");
+                        $("<li></li>", {
+                            "class": "left clearfix " + numofposts
+                        }).prependTo(".chat");
 
-    $('<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' + resultjson[i].date + '</small></div>').appendTo("." + numofposts.toString() + " div.chat-body div.header");
+                        $("<span></span>", {
+                            "class": "chat-img pull-left"
+                        }).appendTo("." + numofposts.toString());
 
-    $('<p>' + resultjson[i].data + '</p></div></li>').appendTo("." + numofposts.toString() + " div.chat-body div.header");
+                    }
 
-    if (parseInt(resultjson[i].id) > latestpost) {
-        latestpost = parseInt(resultjson[i].id);
-    }
+                    $("<a></a>", {
+                        'data-toggle':"modal",
+                        'data-target':"#profileView",
+                        'data-user':resultjson[i].user
+                    }).appendTo("." + numofposts.toString() + " span");
 
-    numofposts++;
+                    $("<img />", {
+                        'src':resultjson[i].avatar,
+                        "alt":"Profile Image",
+                        "class":"img-circle avatar"
+                    }).appendTo("." + numofposts.toString() + " span a");
 
-}
+                    $("<div class='chat-body clearfix'><div class='header'>").appendTo("." + numofposts.toString());
+
+                    $("<strong>" + resultjson[i].user + "</strong>", {
+                        "class":'primary-font'
+                    }).appendTo("." + numofposts.toString() + " div.chat-body div.header");
+
+                    $('<small class="pull-right text-muted"><span class="glyphicon glyphicon-time"></span>' + resultjson[i].date + '</small></div>').appendTo("." + numofposts.toString() + " div.chat-body div.header");
+
+                    $('<p>' + resultjson[i].data + '</p></div></li>').appendTo("." + numofposts.toString() + " div.chat-body div.header");
+
+
+                    if (parseInt(resultjson[i].id) > latestpost) {
+                        latestpost = parseInt(resultjson[i].id);
+                    }
+
+                    numofposts++;
+                }
                 document.getElementById("currentchat").value = chatpage;
             }
         }
@@ -88,6 +137,7 @@ for (var i = 0; i < resultjson.length; i++) {
     return false;
 }
 
+// Function for creating chat if it doesn't exist
 function createchat() {
     var chatpage = $("#newchat").serializeArray();
     $.ajax({
@@ -108,6 +158,7 @@ function createchat() {
     return false;
 }
 
+// Called in settings to upload to imgur and return link (imgur anonymous api)
 function upload(file) {
 	if (!file || !file.type.match(/image.*/)) return;
 	document.getElementsByClassName("upload")[0].innerHTML = "Uploading...";
@@ -217,7 +268,6 @@ function loadProfile(event) {
     var modal = $(".modal");
 
     $.get( "profile/"+recipient, function( data ) {
-//alert(data);
         var p = document.querySelectorAll(".modal-body p"), i;
         for (i = 0; i < p.length; ++i) {
             p[i].style.display = "block";
@@ -249,4 +299,11 @@ function loadProfile(event) {
     });
 
     modal.find(".modal-title").text(recipient);
+}
+
+function initChatInput() {
+//alert(window.location.hash);
+    if (window.location.hash) {
+        document.getElementById("newchat").value = window.location.hash.substring(1);
+    } 
 }
