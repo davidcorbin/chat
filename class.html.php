@@ -49,6 +49,11 @@ class html {
 		return '<div class="alert alert-dismissable alert-danger"><button type="button" class="close" data-dismiss="alert">×</button>' . $content . '</div>';
 	}
 	
+	// error.php
+	public function error($error, $title) {
+		$this->main($error, $title);
+	}
+	
 	public function alertsuccess($content) {
 		return '<div class="alert alert-dismissable alert-success"><button type="button" class="close" data-dismiss="alert">×</button>' . $content . '</div>';
 	}

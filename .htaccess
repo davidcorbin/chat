@@ -33,3 +33,5 @@ ErrorDocument 500 /chat/error.php?error=500
      Header set Expires "Wed, 11 Jan 1984 05:00:00 GMT"
   </ifModule>
 </filesMatch>
+
+RedirectMatch 404 /\.git
