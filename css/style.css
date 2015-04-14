@@ -43,7 +43,7 @@
     margin-right: 5px;
 }
 
-.panel-body {
+.panel-body.chat-window {
     overflow-y: scroll;
     height: 60vh;
     -webkit-overflow-scrolling:touch;
