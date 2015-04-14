@@ -7,7 +7,7 @@ $info = '
             <div class="panel-heading">
                <!-- <span>' . $page . '</span>//-->  <span id="chattitle" style="display:inline-block;"></span>
             </div>
-            <div class="panel-body">
+            <div class="panel-body chat-window">
                 <ul class="chat">
                 </ul>
             </div>
@@ -26,33 +26,23 @@ $info = '
     </div>
 
 
-    <div class="col-md-8 col-lg-6 col-centered">
-        <div class="list-group">
-            <a class="list-group-item active">Create or switch to:</a>
-            <div class="list-group-item">
-
-
-   <form role="form" onsubmit="return loadchat(this)">
-      <div class="row">
-         <div class="col-lg-6">
-<div id="newchatfeedback" class="form-group has-feedback">
-<label class="control-label" id="chatfeedback"></label>
-            <div class="input-group">
-               <input type="text" value="chat" id="newchat"  name="newchat" class="form-control" onkeypress="get()" onchange="get()" oninput="get()">
-               <span class="input-group-addon" onclick="document.getElementById(\'newchat\').submit()">
-                  Go
-               </span>
-            </div>
-</div>
-         </div>
-      </div>
-   </form>
-
-            </div>
+<div class="col-md-8 col-lg-6">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <form role="form" onsubmit="return loadchat(this)">
+        <div class="input-group">
+          <input type="text" value="chat" id="newchat"  name="newchat" class="form-control" onkeypress="get()" onchange="get()" oninput="get()">
+          <span class="input-group-addon" onclick="document.getElementById(\'newchat\').submit()">Go</span>
         </div>
+      </form>
     </div>
+    <div class="panel-body">
+      <a href="#c">#c</a>
+      <br>
+      <a href="#ch">#ch</a>
+    </div>
+  </div>
 </div>
-
 
 
 <div class="modal fade" id="profileView" tabindex="-1" role="dialog" aria-labelledby="profileName" aria-hidden="true">
