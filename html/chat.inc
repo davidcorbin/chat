@@ -5,7 +5,7 @@ $info = '
     <div class="col-md-8 col-lg-6 col-centered">
         <div class="panel panel-primary">
             <div class="panel-heading">
-               <!-- <span>' . $page . '</span>//-->  <span id="chattitle" style="display:inline-block;"></span>
+               <!-- <span>' . $page . '</span>//-->  <span id="chattitle" style="display:inline-block;">Loading...</span>
             </div>
             <div class="panel-body chat-window">
                 <ul class="chat">
@@ -37,9 +37,7 @@ $info = '
       </form>
     </div>
     <div class="panel-body">
-      <a href="#c">#c</a>
-      <br>
-      <a href="#ch">#ch</a>
+      ' . $trends . '
     </div>
   </div>
 </div>
