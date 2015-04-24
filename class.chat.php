@@ -19,6 +19,7 @@ class chat extends db {
         $this->fetched_data = $this->fetch("SELECT * FROM " . $this->chat ." ORDER BY date DESC LIMIT $numofposts");
     }
 
+    // Get all posts after a specific id number
     public function getPostsAfterId($id, $numofposts) {
         $this->fetched_data = $this->fetch("SELECT * FROM $this->chat WHERE id > $id ORDER BY date ASC LIMIT $numofposts");
     }
