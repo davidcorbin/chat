@@ -39,6 +39,9 @@ if (!empty($_POST) && isset($_POST['sendbutton'])) {
 	
 	// Increment user post count
 	$database->query("UPDATE logins SET `post_count` = post_count + 1 WHERE username = '" . $_SESSION['un'] . "'");
+	
+	// Update last post date
+	$database->query("UPDATE chats SET `last_update` = " . time() . " WHERE name = '" . $_POST['currentchat'] . "'");
 	exit();
 }
 
@@ -60,18 +63,47 @@ if (!empty($_POST) && isset($_POST['newchat'])) {
 	// Do query
 	$database->query("CREATE TABLE IF NOT EXISTS `chat_" . $database->escape($_POST['newchat']) . "` (
   `id` int(12) NOT NULL AUTO_INCREMENT,
-  `data` varchar(256) NOT NULL,
-  `user` varchar(256) NOT NULL,
+  `data` varchar(255) NOT NULL,
+  `user` varchar(255) NOT NULL,
   `date` int(11) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`id`)
+  PRIMARY KEY `id` (`id`),
+  KEY `user` (`user`),
+  FOREIGN KEY (`user`) REFERENCES `logins` (`username`) ON DELETE CASCADE
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=0;");
+
+	// Insert new chat into index of chats
+	$database->query("INSERT INTO `chats`(`name`, `creator`, `time_created`, `last_updated`) VALUES ('" . $database->escape($_POST['newchat']) . "','" . $_SESSION['un'] . "'," . time() . ",0)");
+
 	echo "created";
 	exit();
 }
 
 else {
+
+    $myprofile = '
+<div class="col-md-12 col-lg-12">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Heading</div>
+        <div class="panel-body nopadding">
+
+        Body
+        <hr style="margin:0px;">
+
+            <div class="col-lg-12">
+                <div class="col-lg-6" style="padding-bottom: 10px; padding-top: 10px">
+                25<br><h6 style="margin:0px">posts</h6>
+                </div>
+                <div class="col-lg-6" style="padding-bottom: 10px; padding-top: 10px">
+                69<br><h6 style="margin:0px">views</h6>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+    ';
+
 	$page="#".$page;
 	$trends = "";
-	$html->chat($page, $trends);
+	$html->chat($page, $trends, $myprofile);
 }
