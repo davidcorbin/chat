@@ -32,7 +32,7 @@ class html {
 	}
 	
 	
-	public function chat($page, $trends) {
+	public function chat($page, $trends, $myprofile) {
 		require("html/chat.inc");
 		$this->main($info, "Chat");
 	}
