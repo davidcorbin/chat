@@ -80,21 +80,31 @@ if (!empty($_POST) && isset($_POST['newchat'])) {
 
 else {
 
+	require_once("class.user.php");
+	$me = new user($_SESSION["un"]);
+
     $myprofile = '
 <div class="col-md-12 col-lg-12">
     <div class="panel panel-primary">
-        <div class="panel-heading">Heading</div>
+        <!--<div class="panel-heading">Heading</div>//-->
         <div class="panel-body nopadding">
 
-        Body
+        <img class="img-circle avatar-lg" src="' . $me->getAvatar() . '" style="display: block; margin: 30px auto;">
+       
         <hr style="margin:0px;">
 
-            <div class="col-lg-12">
-                <div class="col-lg-6" style="padding-bottom: 10px; padding-top: 10px">
-                25<br><h6 style="margin:0px">posts</h6>
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="col-sm-6 col-md-6 col-lg-6" style="padding-bottom: 10px; padding-top: 10px">
+                    <a style="margin:auto; text-align:center; color:inherit;">
+                        <h4 style="margin:0px;">' . $me->getPostCount() . '</h4>
+                        <h6 style="margin:0px;">posts</h6>
+                    </a>
                 </div>
-                <div class="col-lg-6" style="padding-bottom: 10px; padding-top: 10px">
-                69<br><h6 style="margin:0px">views</h6>
+                <div class="col-sm-6 col-md-6 col-lg-6" style="padding-bottom: 10px; padding-top: 10px">
+                    <a style="margin:auto; text-align:center; color:inherit;">
+                        <h4 style="margin:0px;">' . $me->getProfileViews() . '</h4>
+                        <h6 style="margin:0px;">views</h6>
+                    </a>
                 </div>
             </div>
 
