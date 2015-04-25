@@ -1,52 +1,49 @@
 <?php
 
 $info = '
-<div class="container">
 
-    <div class="col-md-4 col-lg-4">
+<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 nopadding">
 
 ' . $myprofile . '
 
-        <div class="col-md-12 col-lg-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <form role="form" onsubmit="return loadchat(this)">
-                        <div class="input-group">
-                            <input type="text" value="chat" id="newchat"  name="newchat" class="form-control" onkeypress="get()" onchange="get()" oninput="get()">
-                            <span class="input-group-addon" onclick="document.getElementById(\'newchat\').submit()">Go</span>
-                        </div>
-                    </form>
-                </div>
-                <div class="panel-body">
-                ' . $trends . '
-                </div>
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <form role="form" onsubmit="return loadchat(this)">
+                    <div class="input-group">
+                        <input type="text" value="chat" id="newchat"  name="newchat" class="form-control" onkeypress="get()" onchange="get()" oninput="get()">
+                        <span class="input-group-addon" onclick="document.getElementById(\'newchat\').submit()">Go</span>
+                    </div>
+                </form>
+            </div>
+            <div class="panel-body">
+            ' . $trends . '
             </div>
         </div>
-
     </div>
-    <div class="col-md-8 col-lg-8">
 
-        <div class="col-md-12 col-lg-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                   <span id="chattitle" style="display:inline-block;">Loading...</span>
-                </div>
-                <div class="panel-body chat-window">
-                    <ul class="chat"></ul>
-                </div>
-                <div class="panel-footer">
-                    <form id="chatmes" name="chatmes" onsubmit="return send(this);">
-                        <div class="input-group">
-                            <input name="sendbutton" id="sendbutton" type="text" class="form-control input-sm" autocomplete="off" placeholder="Type your message here..." />
-                            <span class="input-group-btn">
-                                <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
-                            </span>
-                        </div>
-                    </form>
-                </div>
+</div>
+<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 nopadding">
+
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+               <span id="chattitle" style="display:inline-block;">Loading...</span>
+            </div>
+            <div class="panel-body chat-window">
+                <ul class="chat"></ul>
+            </div>
+            <div class="panel-footer">
+                <form id="chatmes" name="chatmes" onsubmit="return send(this);">
+                    <div class="input-group">
+                        <input name="sendbutton" id="sendbutton" type="text" class="form-control input-sm" autocomplete="off" placeholder="Type your message here..." />
+                        <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </div>
-
     </div>
 </div>
 
