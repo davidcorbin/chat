@@ -1,14 +1,17 @@
+// Do this once, when the page loads
 window.onload = function(){
+
+//// Event listeners ////
     $("#profileView").on("show.bs.modal",function (event) { 
         loadProfile(event); 
     });
-
     $(window).on("hashchange", function() {
         document.getElementById("newchat").value = window.location.hash.substring(1);
         get();
     });
 
     initChatInput();
+    // Update chat
     get();
 }
 
@@ -24,18 +27,28 @@ var latestpost = -1;
 // Previous get() chat name
 var prevchatname = "";
 
+// UTC time of last get
+var last_get = 0;
+
+//// MESSAGES ////
+
+// Chat doesn't exist message
+var chat_not_exist = "<p>This chat doesn't exist. Would you like to create it?</p><button class='btn btn-default' onclick='createchat()'>Yes</button>";
+
+// Chat doesn't have any posts yet
+var chat_empty = "<p>This chat has no posts yet! Be the first!</p>";
+
+
 // Function for sending a chat message
 function send(formEl) {
+    // If nothing to send, return
     if (document.getElementById("sendbutton").value == "") {
         return false;
     }
 
-    var url = $(formEl).attr("action");
-    var data = $("#chatmes").serializeArray();
-
     $.ajax({
-        url: url,
-        data: data,
+        url: "chat",
+        data: { "sendbutton" : $("#sendbutton").val() , "currentchat" : $("#newchat").val() },
         type: "post",
         success: function(data) {
             document.getElementById("sendbutton").value = "";
@@ -45,8 +58,18 @@ function send(formEl) {
     return false;
 }
 
+
 // Function for getting chat json from database
 function get() {
+    console.log("Started getting");
+    // Don't start function if it ran recently
+    var currentUTC = new Date().getTime();
+    if (last_get + 1000 >= currentUTC) {
+        console.log("Last get was too recent, returning");
+        return false;
+    }
+    last_get = currentUTC;
+
     var chatpage = document.getElementById("newchat").value;
 
     // Update URL hash
@@ -63,7 +86,7 @@ function get() {
         numofposts = 0;
         prevchatname = chatpage;
     }
-
+    console.log("Latest post num: " + latestpost);
     $.ajax({
         url: "chatupdate",
         data: { "chatpage": chatpage, "latestpost": latestpost },
@@ -71,10 +94,24 @@ function get() {
         cache: "false",
         success: function(data) {
 
+            console.log(data);
+
+            // If chat has no posts yet
+            if (data=="[]" && numofposts == 0) {
+                $(".chat").html(chat_empty);
+            }
+
+            // If chat has no posts yet
+            if (data=="[]" && $(".chat").html()==chat_empty) {
+                $("#chattitle").text("Chat empty");
+                $(".chat").html(chat_empty);
+return;
+            }
+
             // If chat doesn't exist and can be created
             if (data=="create") {
                 $("#chattitle").text("Chat not found");
-                $(".chat").html("<p>This chat doesn't exist. Would you like to create it?</p><button class='btn btn-default' onclick='createchat()'>Yes</button>");
+                $(".chat").html(chat_not_exist);
             }
 
             // If chat can't be created for whatever reason
@@ -85,12 +122,25 @@ function get() {
 
             // Continue to parse json
             else {
+
+                // If there are no posts yet, make sure chat is empty
+                if (numofposts==0) {
+                    $(".chat").html("");
+                }
+
                 // Change chat title
                 $("#chattitle").text("#"+chatpage);
 
-                var resultjson = JSON.parse(data);
+                if (data) {
+                    try {
+                        var resultjson = JSON.parse(data);
+                    } catch(e) {
+                        alert(e);
+                    }
+                }
 
                 // Loop through all returned posts
+
                 for (var i = 0; i < resultjson.length; i++) {
 
                     // If post is from me
@@ -140,17 +190,20 @@ function get() {
 
                     $('<p>' + resultjson[i].data + '</p></div></li>').appendTo("." + numofposts.toString() + " div.chat-body div.header");
 
-
+                    // Update the latest post id
+                    console.log("Added parsing latest post id");
                     if (parseInt(resultjson[i].id) > latestpost) {
                         latestpost = parseInt(resultjson[i].id);
                     }
 
                     numofposts++;
                 }
-                document.getElementById("currentchat").value = chatpage;
             }
         }
     });
+
+    console.log("Done getting");
+
     return false;
 }
 
