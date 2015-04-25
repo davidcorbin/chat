@@ -1,46 +1,56 @@
 <?php
 
 $info = '
-<div class="row">
-    <div class="col-md-8 col-lg-6 col-centered">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-               <!-- <span>' . $page . '</span>//-->  <span id="chattitle" style="display:inline-block;">Loading...</span>
-            </div>
-            <div class="panel-body chat-window">
-                <ul class="chat">
-                </ul>
-            </div>
-            <div class="panel-footer">
-                <form id="chatmes" name="chatmes" method="post" action="chat" onsubmit="return send(this);">
-                    <input type="hidden" name="currentchat" id="currentchat" value="">
-                    <div class="input-group">
-                        <input name="sendbutton" id="sendbutton" type="text" class="form-control input-sm" autocomplete="off" placeholder="Type your message here..." />
-                        <span class="input-group-btn">
-                            <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
-                        </span>
-                    </div>
-                </form>
+<div class="container">
+
+    <div class="col-md-4 col-lg-4">
+
+' . $myprofile . '
+
+        <div class="col-md-12 col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <form role="form" onsubmit="return loadchat(this)">
+                        <div class="input-group">
+                            <input type="text" value="chat" id="newchat"  name="newchat" class="form-control" onkeypress="get()" onchange="get()" oninput="get()">
+                            <span class="input-group-addon" onclick="document.getElementById(\'newchat\').submit()">Go</span>
+                        </div>
+                    </form>
+                </div>
+                <div class="panel-body">
+                ' . $trends . '
+                </div>
             </div>
         </div>
+
     </div>
+    <div class="col-md-8 col-lg-8">
 
-
-<div class="col-md-8 col-lg-6">
-  <div class="panel panel-primary">
-    <div class="panel-heading">
-      <form role="form" onsubmit="return loadchat(this)">
-        <div class="input-group">
-          <input type="text" value="chat" id="newchat"  name="newchat" class="form-control" onkeypress="get()" onchange="get()" oninput="get()">
-          <span class="input-group-addon" onclick="document.getElementById(\'newchat\').submit()">Go</span>
+        <div class="col-md-12 col-lg-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                   <span id="chattitle" style="display:inline-block;">Loading...</span>
+                </div>
+                <div class="panel-body chat-window">
+                    <ul class="chat"></ul>
+                </div>
+                <div class="panel-footer">
+                    <form id="chatmes" name="chatmes" onsubmit="return send(this);">
+                        <div class="input-group">
+                            <input name="sendbutton" id="sendbutton" type="text" class="form-control input-sm" autocomplete="off" placeholder="Type your message here..." />
+                            <span class="input-group-btn">
+                                <button class="btn btn-warning btn-sm" id="btn-chat">Send</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-      </form>
+
     </div>
-    <div class="panel-body">
-      ' . $trends . '
-    </div>
-  </div>
 </div>
+
+
 
 
 <div class="modal fade" id="profileView" tabindex="-1" role="dialog" aria-labelledby="profileName" aria-hidden="true">
@@ -67,6 +77,7 @@ $info = '
     </div>
   </div>
 </div>
+
 
 <script type="text/javascript" src="js/chat.js"></script>
     
